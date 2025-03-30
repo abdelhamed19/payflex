@@ -11,11 +11,6 @@
           <i class="fe fe-sun fe-16"></i>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
-          <span class="fe fe-grid fe-16"></span>
-        </a>
-      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-muted my-2" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fe fe-globe fe-16"></i>

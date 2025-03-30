@@ -14,4 +14,8 @@ class Sidebar extends BaseModel
     {
         return $this->hasMany(SidebarChildren::class, 'sidebar_id', 'id');
     }
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
 }

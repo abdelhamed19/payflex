@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('route')->nullable();
             $table->string('route_name')->nullable();
             $table->string('route_params')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

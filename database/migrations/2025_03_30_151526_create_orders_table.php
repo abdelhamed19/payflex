@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sidebars', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->json('name');
-            $table->string('icon')->nullable();
-            $table->string('route')->nullable();
-            $table->string('route_name')->nullable();
-            $table->string('route_params')->nullable();
-            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sidebars');
+        Schema::dropIfExists('orders');
     }
 };

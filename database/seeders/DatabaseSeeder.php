@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Sidebar;
+use App\Models\SidebarChildren;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,23 +19,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             RegionSeeder::class,
             CitySeeder::class,
-        ]);
-        Sidebar::create([
-            'name' => json_encode([
-                'ar' => 'الصفحة الرئيسية',
-                'en' => 'Home'
-            ], JSON_UNESCAPED_UNICODE),
-            'icon' => 'fe fe-home fe-16',
-
-        ]);
-        Sidebar::create([
-            'name' => json_encode([
-                'ar' => 'الدول',
-                'en' => 'Countries'
-            ], JSON_UNESCAPED_UNICODE),
-            'icon' => 'fe fe-globe fe-16',
-            'route' => '/countries',
-            'route_name' => 'countries.index',
+            SideBarSeeder::class,
         ]);
     }
 }

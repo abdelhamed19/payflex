@@ -135,7 +135,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "القاهرة",
     "name_en": "Cairo",
     "center": [
@@ -144,7 +144,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الجيزة",
     "name_en": "Giza",
     "center": [
@@ -153,7 +153,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الإسكندرية",
     "name_en": "Alexandria",
     "center": [
@@ -162,7 +162,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الدقهلية",
     "name_en": "Dakahlia",
     "center": [
@@ -171,7 +171,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "البحيرة",
     "name_en": "Beheira",
     "center": [
@@ -180,7 +180,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الشرقية",
     "name_en": "Sharqia",
     "center": [
@@ -189,7 +189,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "القليوبية",
     "name_en": "Qalyubia",
     "center": [
@@ -198,7 +198,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "المنوفية",
     "name_en": "Menoufia",
     "center": [
@@ -207,7 +207,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الغربية",
     "name_en": "Gharbia",
     "center": [
@@ -216,7 +216,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "كفر الشيخ",
     "name_en": "Kafr El-Sheikh",
     "center": [
@@ -225,7 +225,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الفيوم",
     "name_en": "Faiyum",
     "center": [
@@ -234,7 +234,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "بني سويف",
     "name_en": "Beni Suef",
     "center": [
@@ -243,7 +243,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "المنيا",
     "name_en": "Minya",
     "center": [
@@ -252,7 +252,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "أسيوط",
     "name_en": "Asyut",
     "center": [
@@ -261,7 +261,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "سوهاج",
     "name_en": "Sohag",
     "center": [
@@ -270,7 +270,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "قنا",
     "name_en": "Qena",
     "center": [
@@ -279,7 +279,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الأقصر",
     "name_en": "Luxor",
     "center": [
@@ -288,7 +288,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "أسوان",
     "name_en": "Aswan",
     "center": [
@@ -297,7 +297,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "البحر الأحمر",
     "name_en": "Red Sea",
     "center": [
@@ -306,7 +306,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الوادي الجديد",
     "name_en": "New Valley",
     "center": [
@@ -315,7 +315,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "مطروح",
     "name_en": "Matrouh",
     "center": [
@@ -324,7 +324,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "بورسعيد",
     "name_en": "Port Said",
     "center": [
@@ -333,7 +333,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الإسماعيلية",
     "name_en": "Ismailia",
     "center": [
@@ -342,7 +342,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "السويس",
     "name_en": "Suez",
     "center": [
@@ -351,7 +351,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "شمال سيناء",
     "name_en": "North Sinai",
     "center": [
@@ -360,7 +360,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "جنوب سيناء",
     "name_en": "South Sinai",
     "center": [
@@ -369,7 +369,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "دمياط",
     "name_en": "Damietta",
     "center": [
@@ -378,7 +378,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "المنصورة",
     "name_en": "Mansoura",
     "center": [
@@ -387,7 +387,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "أبو سمبل",
     "name_en": "Abu Simbel",
     "center": [
@@ -396,7 +396,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الطور",
     "name_en": "El Tor",
     "center": [
@@ -405,7 +405,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "دهب",
     "name_en": "Dahab",
     "center": [
@@ -414,7 +414,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الواحات البحرية",
     "name_en": "Bahariya Oasis",
     "center": [
@@ -423,7 +423,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الواحات الخارجة",
     "name_en": "Kharga Oasis",
     "center": [
@@ -432,7 +432,7 @@
     ]
   },
   {
-    "country_id": 65,
+    "country_id": 66,
     "name_ar": "الواحات الداخلة",
     "name_en": "Dakhla Oasis",
     "center": [

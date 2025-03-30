@@ -31,11 +31,12 @@
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements-{{ $item->id }}">
                             @foreach ($item->children as $child)
-                                <li class="nav-item">
-                                    <a class="nav-link pl-3" href="#">
-                                        <span class="ml-1 item-text">{{ $child->getTranslation($child->name) }}</span>
-                                    </a>
-                                </li>
+                            <li>
+                                <a class="nav-link pl-3" href="{{ $child->route }}">
+                                    <i class="{{ $child->icon }}"></i>
+                                    <span class="ml-1 item-text">{{ $child->getTranslation($child->name) }}</span>
+                                </a>
+                            </li>
                             @endforeach
                         </ul>
                     @else

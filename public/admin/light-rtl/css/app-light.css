@@ -5328,6 +5328,36 @@ a.badge-primary:focus {
     color: #ffffff;
     background-color: #004ee7;
 }
+/* تحسين مظهر المحرر */
+#editor {
+    background: #fff;
+    min-height: 200px; /* ارتفاع افتراضي عند الفراغ */
+    max-height: 400px; /* أقصى ارتفاع */
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-y: auto; /* التمرير عند الامتلاء */
+}
+
+/* ضبط شريط الأدوات */
+.ql-toolbar {
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* تحسين شكل أزرار شريط الأدوات */
+.ql-toolbar button {
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.ql-toolbar button:hover {
+    background: #ddd;
+}
+
 
 a.badge-primary:focus,
 a.badge-primary.focus {
