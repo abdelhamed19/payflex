@@ -1,0 +1,578 @@
+[
+  {
+    "country_id": 195,
+    "name_ar": "الرياض",
+    "name_en": "Riyadh",
+    "center": [
+      28.41463997,
+      36.53387003
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "مكة المكرمة",
+    "name_en": "Makkah Al Mukarramah",
+    "center": [
+      28.30507995,
+      35.74931003
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "المدينة المنورة",
+    "name_en": "Al Madinah Al Munawwarah",
+    "center": [
+      24.69999996,
+      46.73333003
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "القصيم",
+    "name_en": "Qassim",
+    "center": [
+      28.65152001,
+      35.38013
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "الشرقية",
+    "name_en": "Eastern",
+    "center": [
+      21.26848005,
+      40.41667003
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "عسير",
+    "name_en": "Aseer",
+    "center": [
+      21.42717994,
+      39.84349001
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "تبوك",
+    "name_en": "Tabuk",
+    "center": [
+      29.60751999,
+      37.23556001
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "حائل",
+    "name_en": "Hail",
+    "center": [
+      29.60751999,
+      37.23556001
+    ]
+  },
+  {
+    "country_id": 195,
+    "name_ar": "جازان",
+    "name_en": "Jazan",
+    "center": [
+      29.60751999,
+      37.23556001
+    ]
+  },
+  {
+    "country_id": 117,
+    "name_ar": " العاصمة (الكويت)",
+    "name_en": "Capital (Kuwait)",
+    "center": [
+      29.311661,
+      47.481766
+    ]
+  },
+  {
+    "country_id": 117,
+    "name_ar": " الأحمدي",
+    "name_en": "Ahmadi",
+    "center": [
+      29.311661,
+      47.481766
+    ]
+  },
+  {
+    "country_id": 117,
+    "name_ar": "الجهراء",
+    "name_en": "Jahra",
+    "center": [
+      29.311661,
+      47.481766
+    ]
+  },
+  {
+    "country_id": 117,
+    "name_ar": "الفروانية",
+    "name_en": "Al Farwaniyah",
+    "center": [
+      29.311661,
+      47.481766
+    ]
+  },
+  {
+    "country_id": 117,
+    "name_ar": "حولي",
+    "name_en": "Hawalli ",
+    "center": [
+      29.311661,
+      47.481766
+    ]
+  },
+  {
+    "country_id": 117,
+    "name_ar": "مبارك الكبير",
+    "name_en": "Mubarak the Great ",
+    "center": [
+      29.311661,
+      47.481766
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "القاهرة",
+    "name_en": "Cairo",
+    "center": [
+      30.0444,
+      31.2357
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الجيزة",
+    "name_en": "Giza",
+    "center": [
+      30.0131,
+      31.2089
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الإسكندرية",
+    "name_en": "Alexandria",
+    "center": [
+      31.2001,
+      29.9187
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الدقهلية",
+    "name_en": "Dakahlia",
+    "center": [
+      31.051,
+      31.3807
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "البحيرة",
+    "name_en": "Beheira",
+    "center": [
+      30.7063,
+      30.957
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الشرقية",
+    "name_en": "Sharqia",
+    "center": [
+      30.7327,
+      31.713
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "القليوبية",
+    "name_en": "Qalyubia",
+    "center": [
+      30.4241,
+      31.173
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "المنوفية",
+    "name_en": "Menoufia",
+    "center": [
+      30.472,
+      30.9313
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الغربية",
+    "name_en": "Gharbia",
+    "center": [
+      30.875,
+      31.0335
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "كفر الشيخ",
+    "name_en": "Kafr El-Sheikh",
+    "center": [
+      31.1,
+      30.933
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الفيوم",
+    "name_en": "Faiyum",
+    "center": [
+      29.3084,
+      30.8428
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "بني سويف",
+    "name_en": "Beni Suef",
+    "center": [
+      29.0661,
+      31.0994
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "المنيا",
+    "name_en": "Minya",
+    "center": [
+      28.108,
+      30.7503
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "أسيوط",
+    "name_en": "Asyut",
+    "center": [
+      27.1783,
+      31.1859
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "سوهاج",
+    "name_en": "Sohag",
+    "center": [
+      26.5589,
+      31.6914
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "قنا",
+    "name_en": "Qena",
+    "center": [
+      26.1642,
+      32.7267
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الأقصر",
+    "name_en": "Luxor",
+    "center": [
+      25.6872,
+      32.6396
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "أسوان",
+    "name_en": "Aswan",
+    "center": [
+      24.0889,
+      32.8998
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "البحر الأحمر",
+    "name_en": "Red Sea",
+    "center": [
+      26.7557,
+      33.9497
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الوادي الجديد",
+    "name_en": "New Valley",
+    "center": [
+      25.4358,
+      30.5546
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "مطروح",
+    "name_en": "Matrouh",
+    "center": [
+      31.3525,
+      27.2373
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "بورسعيد",
+    "name_en": "Port Said",
+    "center": [
+      31.2653,
+      32.3019
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الإسماعيلية",
+    "name_en": "Ismailia",
+    "center": [
+      30.6043,
+      32.2651
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "السويس",
+    "name_en": "Suez",
+    "center": [
+      29.9668,
+      32.5498
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "شمال سيناء",
+    "name_en": "North Sinai",
+    "center": [
+      31.1091,
+      33.8129
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "جنوب سيناء",
+    "name_en": "South Sinai",
+    "center": [
+      28.539,
+      33.948
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "دمياط",
+    "name_en": "Damietta",
+    "center": [
+      31.4165,
+      31.8133
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "المنصورة",
+    "name_en": "Mansoura",
+    "center": [
+      31.035,
+      31.3807
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "أبو سمبل",
+    "name_en": "Abu Simbel",
+    "center": [
+      22.3372,
+      31.6258
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الطور",
+    "name_en": "El Tor",
+    "center": [
+      28.2418,
+      33.6226
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "دهب",
+    "name_en": "Dahab",
+    "center": [
+      28.5095,
+      34.5136
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الواحات البحرية",
+    "name_en": "Bahariya Oasis",
+    "center": [
+      27.2862,
+      28.8785
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الواحات الخارجة",
+    "name_en": "Kharga Oasis",
+    "center": [
+      25.4522,
+      30.5441
+    ]
+  },
+  {
+    "country_id": 65,
+    "name_ar": "الواحات الداخلة",
+    "name_en": "Dakhla Oasis",
+    "center": [
+      25.4999,
+      29.235
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "أبوظبي",
+    "name_en": "Abu Dhabi",
+    "center": [
+      24.4539,
+      54.3773
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "دبي",
+    "name_en": "Dubai",
+    "center": [
+      25.276987,
+      55.296249
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "الشارقة",
+    "name_en": "Sharjah",
+    "center": [
+      25.3463,
+      55.4209
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "عجمان",
+    "name_en": "Ajman",
+    "center": [
+      25.4052,
+      55.5136
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "أم القيوين",
+    "name_en": "Umm Al Quwain",
+    "center": [
+      25.5647,
+      55.5552
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "رأس الخيمة",
+    "name_en": "Ras Al Khaimah",
+    "center": [
+      25.8007,
+      55.9762
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "الفجيرة",
+    "name_en": "Fujairah",
+    "center": [
+      25.1288,
+      56.3265
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "العين",
+    "name_en": "Al Ain",
+    "center": [
+      24.1302,
+      55.8023
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "خورفكان",
+    "name_en": "Khor Fakkan",
+    "center": [
+      25.3374,
+      56.361
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "دبا الفجيرة",
+    "name_en": "Dibba Al-Fujairah",
+    "center": [
+      25.5925,
+      56.2618
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "دبا الحصن",
+    "name_en": "Dibba Al-Hisn",
+    "center": [
+      25.6196,
+      56.2729
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "مدينة زايد",
+    "name_en": "Madinat Zayed",
+    "center": [
+      23.6538,
+      53.7059
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "الرويس",
+    "name_en": "Ruwais",
+    "center": [
+      24.1212,
+      52.7306
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "حتا",
+    "name_en": "Hatta",
+    "center": [
+      24.7968,
+      56.1177
+    ]
+  },
+  {
+    "country_id": 231,
+    "name_ar": "الذيد",
+    "name_en": "Al Dhaid",
+    "center": [
+      25.2881,
+      55.8814
+    ]
+  }
+]
