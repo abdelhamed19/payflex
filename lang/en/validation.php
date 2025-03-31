@@ -157,6 +157,18 @@ return [
     'url' => 'The :attribute field must be a valid URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
+    'valid_section_name' => [
+        'numbers_only' => 'The :attribute field must not contain only numbers.',
+        'multiple_spaces' => 'The :attribute field must not contain multiple consecutive spaces.',
+        'start_end_spaces' => 'The :attribute field must not start or end with spaces.',
+        'special_characters' => 'The :attribute field must not contain special characters.',
+    ],
+    'route' => [
+        'string' => 'The :attribute field must be a string.',
+        'max' => 'The :attribute field must not exceed 255 characters.',
+        'regex_slash' => 'The :attribute field must start with a forward slash (/).',
+        'regex_num' => 'The :attribute field must contain only letters, numbers, underscores, and slashes.',
+    ],
 
     /*
     |--------------------------------------------------------------------------

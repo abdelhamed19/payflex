@@ -32,4 +32,7 @@ return [
     'add_child_section' => 'إضافة قسم فرعي',
     'image' => 'الصورة',
     'editor' => 'المحرر',
+    'create' => 'إنشاء',
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
 ];

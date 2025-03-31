@@ -31,7 +31,7 @@
                             </div>
                             <div class="col ml-auto">
                                 <div class="dropdown float-right">
-                                    <button class="btn btn-primary float-right ml-3" type="button">Add more +</button>
+                                    <a href="" role="button" class="btn btn-primary float-right ml-3" >{{ __('admin.create') }}</a>
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Action </button>
                                     <div class="dropdown-menu" aria-labelledby="actionMenuButton">
@@ -56,6 +56,7 @@
                                     <th>{{ __('admin.name') }}</th>
                                     <th>{{ __('admin.region') }}</th>
                                     <th>{{ __('admin.country') }}</th>
+                                    <th>{{ __('admin.status') }}</th> <!-- إضافة عنوان العمود -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,9 @@
                                         <td>{{ $city->getTranslation($city->name) }}</td>
                                         <td>{{ $city->getTranslation($city->region->name) }}</td>
                                         <td>{{ $city->getTranslation($city->country->name) }}</td>
+                                        <td>
+                                            <x-admin.toggle-switch :id="$city->id" :isActive="$city->is_active" model="City" />
+                                        </td>
                                         <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <span class="text-muted sr-only">Action</span>

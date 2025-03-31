@@ -33,4 +33,7 @@ return [
     'name_ar' => 'Name in Arabic',
     'image' => 'Image',
     'editor' => 'Editor',
+    'create' => 'Create',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
 ];

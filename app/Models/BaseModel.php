@@ -11,6 +11,9 @@ class BaseModel extends Model
     public function getTranslation($attribute)
     {
         $locale = session()->get('lang');
+        if (is_null(json_decode($attribute, true))) {
+            return $attribute;
+        }
         $attribute = json_decode($attribute, true);
         if (isset($attribute[$locale])) {
             return $attribute[$locale];

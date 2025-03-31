@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Sidebar;
-use App\Models\SidebarChildren;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SideBarSeeder extends Seeder
 {
@@ -26,13 +23,22 @@ class SideBarSeeder extends Seeder
         ]);
         DB::table('sidebars')->insert([
             'name' => json_encode([
+                'ar' => 'السكاشن',
+                'en' => 'Sections'
+            ], JSON_UNESCAPED_UNICODE),
+            'icon' => 'fe fe-layers fe-16',
+            'route' => '/sections/create',
+            'route_name' => 'sections.create',
+        ]);
+        DB::table('sidebars')->insert([
+            'name' => json_encode([
                 'ar' => 'جغرافيا',
                 'en' => 'Geography'
             ], JSON_UNESCAPED_UNICODE),
             'icon' => 'fe fe-globe fe-16',
         ]);
         DB::table('sidebar_childrens')->insert([
-            'sidebar_id' => 2,
+            'sidebar_id' => 3,
             'name' => json_encode([
                 'ar' => 'الدول',
                 'en' => 'Countries'
@@ -42,7 +48,7 @@ class SideBarSeeder extends Seeder
             'route_name' => 'countries.index',
         ]);
         DB::table('sidebar_childrens')->insert([
-            'sidebar_id' => 2,
+            'sidebar_id' => 3,
             'name' => json_encode([
                 'ar' => 'المناطق',
                 'en' => 'Regions'
@@ -52,7 +58,7 @@ class SideBarSeeder extends Seeder
             'route_name' => 'regions.index',
         ]);
         DB::table('sidebar_childrens')->insert([
-            'sidebar_id' => 2,
+            'sidebar_id' => 3,
             'name' => json_encode([
                 'ar' => 'المدن',
                 'en' => 'Cities'

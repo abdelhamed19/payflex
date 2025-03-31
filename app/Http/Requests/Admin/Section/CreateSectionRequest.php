@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Admin\Section;
 
+use App\Http\Requests\BaseRequest;
+use App\Rules\Admin\ValidSectionNameRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CreateSectionRequest extends FormRequest
+class CreateSectionRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,19 +16,28 @@ class CreateSectionRequest extends FormRequest
     {
         return true;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'name.*' => 'required|string|max:255',
+            'name.*' => ['required', 'string', 'max:255', new ValidSectionNameRule()],
             'icon' => 'required|string|max:255',
-            'route' => 'nullable|string|max:255',
             'route_name' => 'nullable|string|max:255',
+            'route' => [
+                'nullable',
+                'string',
+                'max:255',
+
+                function ($attribute, $value, $fail) {
+                    if (isset($value)) {
+                        if (!preg_match('/^\//', $value)) {
+                            $fail(__('validation.route.regex_slash'));
+                        }
+                        if (!preg_match('/^[a-zA-Z0-9_\/]+$/', $value)) {
+                            $fail(__('validation.route.regex_num'));
+                        }
+                    }
+                },
+            ],
             'is_active' => 'required|boolean',
             'child_sections.*.name.*' => 'required|string|max:255',
             'child_sections.*.icon' => 'nullable|string|max:255',

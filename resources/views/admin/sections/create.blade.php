@@ -23,8 +23,8 @@
                                                 <div class="form-group">
                                                     <label for="arabicName">Name (AR)</label>
                                                     <input type="text" class="form-control" name="name[ar]" placeholder="الاوردرات"
-                                                        value="{{ old('name.ar') }}" required>
-                                                    <div class="invalid-feedback"> Please enter a valid name. </div>
+                                                        value="{{ old('name.ar') }}">
+                                                        <x-validation-message field="name.ar" />
                                                 </div>
                                             </div>
                                         </div>
@@ -40,8 +40,8 @@
                                                 <div class="form-group">
                                                     <label for="englishName">Name (EN)</label>
                                                     <input type="text" class="form-control" name="name[en]" placeholder="Orders"
-                                                        value="{{ old('name.en') }}" required>
-                                                    <div class="valid-feedback"> Looks good! </div>
+                                                        value="{{ old('name.en') }}">
+                                                         <x-validation-message field="name.en" />
                                                 </div>
                                             </div>
                                         </div>
@@ -55,15 +55,16 @@
                                                     <div class="form-group">
                                                         <label for="route">{{ __('admin.route') }}</label>
                                                         <input type="text" class="form-control" name="route" placeholder="section/create/"
-                                                            value="{{ old('route') }}" required>
-                                                        <div class="invalid-feedback"> Please enter a valid route. </div>
+                                                            value="{{ old('route') }}">
+                                                            <x-validation-message field="route" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="route_name">{{ __('admin.route_name') }}</label>
                                                         <input type="text" class="form-control" name="route_name" placeholder="section.create"
-                                                            value="{{ old('route_name') }}" required>
+                                                            value="{{ old('route_name') }}">
+                                                            <x-validation-message field="route_name" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,7 +92,7 @@
                                                     <div class="form-group">
                                                         <label for="icon">{{ __('admin.icon') }}</label>
                                                         <input type="text" class="form-control" name="icon" placeholder="nav-item nav-notif"
-                                                            value="{{ old('icon') }}" required>
+                                                            value="{{ old('icon') }}">
                                                     </div>
                                                 </div>
                                             </div>

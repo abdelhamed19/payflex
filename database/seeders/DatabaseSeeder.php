@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             CitySeeder::class,
             SideBarSeeder::class,
+            // OrderSeeder::class,
         ]);
     }
 }

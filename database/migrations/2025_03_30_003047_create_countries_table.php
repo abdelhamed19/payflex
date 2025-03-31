@@ -32,6 +32,7 @@ return new class extends Migration
             $table->decimal('longitude', 10, 7)->nullable();
             $table->string('emoji', 10)->nullable();
             $table->string('emojiU', 20)->nullable();
+            $table->boolean('is_active')->default(1);
         });
     }
 

@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
+    <title>@yield('title' ?? 'Dashboard')</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset("admin/$path/css/simplebar.css") }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -86,6 +85,8 @@
     <script src="{{ asset("admin/$path/js/quill.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/jquery.dataTables.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/dataTables.bootstrap4.min.js") }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
         $('.select2').select2({

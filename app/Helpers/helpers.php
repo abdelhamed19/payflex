@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 
 function createSectionViews($sectionName)
 {
-    $folder = resource_path("views/admin/" . strtolower($sectionName));
+    $folder = resource_path("views/admin/" . $sectionName);
 
     // إنشاء المجلد إذا لم يكن موجودًا
     if (!File::exists($folder)) {
@@ -30,6 +30,9 @@ function createSectionViews($sectionName)
 function createModelWithMigration($sectionName)
 {
     $modelName = Str::studly(Str::singular($sectionName));
+    if (class_exists($modelName)) {
+        return; // إذا كان الموديل موجودًا بالفعل، لا تقم بإنشائه مرة أخرى
+    }
 
     // إنشاء الموديل والـ migration
     Artisan::call("make:model {$modelName} -m");
@@ -42,7 +45,7 @@ function createModelWithMigration($sectionName)
         // إضافة `protected $guarded = [];` بعد `class {ModelName}`
         $updatedContent = preg_replace(
             '/class ' . $modelName . ' extends Model\s*{/',
-            "class {$modelName} extends BaseModel {\n    protected \$guarded = [];",
+            "class {$modelName} extends BaseModel {\n    protected \$guarded = []; \n",
             $modelContent
         );
 
@@ -53,33 +56,64 @@ function appendRoutes($sectionName)
 {
     $routeFilePath = base_path('routes/web.php');
     $controllerName = Str::studly(Str::singular($sectionName)) . 'Controller';
-    $routeName = strtolower($sectionName);
     $controllerNamespace = "App\\Http\\Controllers\\Admin\\{$controllerName}";
 
-    // التأكد من أن `use` غير مكرر
+    // قراءة محتوى ملف routes/web.php
     $routeFileContent = File::get($routeFilePath);
+
+    // التأكد من أن `use` غير مكرر
     if (!str_contains($routeFileContent, "use {$controllerNamespace};")) {
-        $routeFileContent = "<?php\n\nuse {$controllerNamespace};\n" . substr($routeFileContent, 5);
+        $routeFileContent = preg_replace('/<\?php\s*/', "<?php\n\nuse {$controllerNamespace};\n", $routeFileContent, 1);
     }
 
-    // تحديد المسارات
+    // تحديد المسارات المطلوب إضافتها داخل المجموعة
     $routes = <<<EOD
 
-// Routes for {$sectionName}
-Route::get('{$routeName}/index', [{$controllerName}::class, 'index'])->name('{$routeName}.index');
-Route::get('{$routeName}/create', [{$controllerName}::class, 'create'])->name('{$routeName}.create');
-Route::post('{$routeName}/store', [{$controllerName}::class, 'store'])->name('{$routeName}.store');
-Route::get('{$routeName}/{id}/edit', [{$controllerName}::class, 'edit'])->name('{$routeName}.edit');
-Route::put('{$routeName}/{id}', [{$controllerName}::class, 'update'])->name('{$routeName}.update');
-Route::delete('{$routeName}/{id}', [{$controllerName}::class, 'destroy'])->name('{$routeName}.destroy');
+    // Routes for {$sectionName}
+    Route::get('{$sectionName}/index', [{$controllerName}::class, 'index'])->name('{$sectionName}.index');
+    Route::get('{$sectionName}/create', [{$controllerName}::class, 'create'])->name('{$sectionName}.create');
+    Route::post('{$sectionName}/store', [{$controllerName}::class, 'store'])->name('{$sectionName}.store');
+    Route::get('{$sectionName}/{id}/edit', [{$controllerName}::class, 'edit'])->name('{$sectionName}.edit');
+    Route::put('{$sectionName}/{id}', [{$controllerName}::class, 'update'])->name('{$sectionName}.update');
+    Route::delete('{$sectionName}/{id}', [{$controllerName}::class, 'destroy'])->name('{$sectionName}.destroy');
 
 EOD;
 
-    // إضافة المسارات إلى `web.php`
-    File::put($routeFilePath, $routeFileContent . $routes);
+    // البحث عن موضع المجموعة
+    $pattern = '/Route::middleware\(\'auth\'\)->group\(function\s*\(\)\s*\{/';
+    if (preg_match($pattern, $routeFileContent, $matches, PREG_OFFSET_CAPTURE)) {
+        // العثور على نهاية المجموعة
+        $closingBracketPos = strrpos($routeFileContent, '});');
+
+        if ($closingBracketPos !== false) {
+            // إدراج المسارات قبل إغلاق المجموعة `});`
+            $routeFileContent = substr_replace($routeFileContent, $routes, $closingBracketPos, 0);
+
+            // حفظ الملف بعد التعديل
+            File::put($routeFilePath, $routeFileContent);
+        }
+    }
+}
+function createRequestFiles($sectionName)
+{
+    $sectionName = Str::studly(Str::singular($sectionName));
+    $requests = [
+        'storeRequest' => "Create{$sectionName}Request",
+        'updateRequest' => "Update{$sectionName}Request"
+    ];
+    foreach ($requests as $requestName) {
+        $requestPath = app_path("Http/Requests/Admin/{$sectionName}/{$requestName}.php");
+
+        // إنشاء الـ request إذا لم يكن موجودًا
+        if (!file_exists($requestPath)) {
+            Artisan::call("make:request Admin/{$sectionName}/{$requestName}");
+        }
+    }
 }
 function createController($sectionName)
 {
+    $modelName = Str::studly(Str::singular($sectionName));
+    $modelPath = '\App\Models\\' . Str::studly(Str::singular($sectionName));
     $controllerName = Str::studly(Str::singular($sectionName)) . 'Controller';
     $controllerPath = app_path("Http/Controllers/Admin/{$controllerName}.php");
 
@@ -87,6 +121,7 @@ function createController($sectionName)
     if (!file_exists($controllerPath)) {
         Artisan::call("make:controller Admin/{$controllerName}");
     }
+
 
     // التأكد من وجود الملف قبل التعديل عليه
     if (file_exists($controllerPath)) {
@@ -102,7 +137,10 @@ class {$controllerName} extends Controller
 {
     public function index()
     {
-        return view('admin.{$sectionName}.index');
+        return view('admin.{$sectionName}.index', [
+            'model' => {$modelPath}::paginate(10),
+            'modelName' => '{$modelName}',
+        ]);
     }
 
     public function create()
@@ -132,5 +170,16 @@ class {$controllerName} extends Controller
 }
 PHP;
         file_put_contents($controllerPath, $controllerTemplate);
+    }
+}
+function createSeeder($sectionName)
+{
+    $seederName = Str::studly(Str::singular($sectionName)) . 'Seeder';
+    $seederPath = database_path("seeders/{$seederName}.php");
+
+    // إنشاء الـ seeder إذا لم يكن موجودًا
+    if (!file_exists($seederPath)) {
+        Artisan::call("make:seeder {$seederName}");
+        Artisan::call("optimize");
     }
 }
