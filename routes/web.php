@@ -15,17 +15,16 @@ use App\Http\Controllers\Admin\SectionController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('change-lang/{lang}', [SettingController::class, 'changeLanguage'])->name('change.language');
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('index');
     })->name('index');
 
-    Route::get('change-lang/{lang}', [SettingController::class, 'changeLanguage'])->name('change.language');
-
     Route::get('countries', [SettingController::class, 'countries'])->name('countries.index');
     Route::get('regions', [SettingController::class, 'regions'])->name('regions.index');
     Route::get('cities', [SettingController::class, 'cities'])->name('cities.index');
+    Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
     Route::get('/admin/toggle-status/{model}/{id}/{action}', [SettingController::class, 'toggleStatus'])
         ->name('admin.toggle-status');

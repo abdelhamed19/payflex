@@ -8,8 +8,24 @@
                     <i class="fe fe-sun fe-16"></i>
                 </a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-muted my-2" href="#" id="languageDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fe fe-globe fe-16"></i>
+                    @if (session('lang') == 'ar')
+                        العربية
+                    @else
+                        English
+                    @endif
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
+                    <a class="dropdown-item" href="{{ route('change.language', 'en') }}">English</a>
+                    <a class="dropdown-item" href="{{ route('change.language', 'ar') }}">العربية</a>
+                </div>
+            </li>
         </ul>
     </nav>
+    <x-flash-message />
     <div class="wrapper">
         <div class="row align-items-center h-100">
             <form action="{{ route('send.login') }}" method="POST" class="col-lg-3 col-md-4 col-10 mx-auto text-center">
@@ -25,32 +41,32 @@
                         </g>
                     </svg>
                 </a>
-                <h1 class="h6 mb-3">Sign in</h1>
+                <h1 class="h6 mb-3"></h1>
                 <div class="form-group">
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" name="email" class="form-control form-control-lg"
-                        placeholder="Email address" required="" autofocus="">
+                    <label for="inputEmail" class="sr-only">{{ __('admin.email') }}</label>
+                    <input type="email" id="inputEmail" name="email" value="{{ old('email') }}" class="form-control form-control-lg"
+                        placeholder="{{ __('admin.email') }}" autofocus="">
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword" class="sr-only">Password</label>
+                    <label for="inputPassword" class="sr-only">{{ __('admin.password') }}</label>
                     <input type="password" name="password" id="inputPassword" class="form-control form-control-lg"
-                        placeholder="Password" required="">
+                        placeholder="{{ __('admin.password') }}" >
                 </div>
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Stay logged in </label>
+                        <input type="checkbox" value="remember-me"> {{ __('admin.remember_me') }} </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">Let me in</button>
+                <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">{{ __('admin.login') }}</button>
 
                 <!-- زر نسيان كلمة المرور -->
                 <div class="mb-3">
-                    <a href="reset-password" class="text-muted">Forgot password?</a>
+                    <a href="reset-password" class="text-muted">{{ __('admin.forgot_password') }}</a>
                 </div>
 
                 <!-- زر التسجيل -->
                 <div class="border-top pt-3">
-                    <p class="text-muted">Don't have an account?
-                        <a href="register" class="btn btn-outline-secondary btn-sm">Register</a>
+                    <p class="text-muted"> {{ __('admin.have_account') }}
+                        <a href="register" class="btn btn-outline-secondary btn-sm">{{ __('admin.register') }}</a>
                     </p>
                 </div>
             </form>

@@ -8,6 +8,21 @@
                     <i class="fe fe-sun fe-16"></i>
                 </a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-muted my-2" href="#" id="languageDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fe fe-globe fe-16"></i>
+                    @if (session('lang') == 'ar')
+                        العربية
+                    @else
+                        English
+                    @endif
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
+                    <a class="dropdown-item" href="{{ route('change.language', 'en') }}">English</a>
+                    <a class="dropdown-item" href="{{ route('change.language', 'ar') }}">العربية</a>
+                </div>
+            </li>
         </ul>
     </nav>
     <x-flash-message />
@@ -28,16 +43,16 @@
                             </g>
                         </svg>
                     </a>
-                    <h2 class="my-3">Reset Password</h2>
+                    <h2 class="my-3">{{ __('admin.reset_password') }}</h2>
                 </div>
-                <p class="text-muted">Enter your email address and we'll send you an email with instructions to reset
-                    your password</p>
+                <p class="text-muted">{{ __('admin.password_reset_instructions') }}</p>
                 <div class="form-group">
-                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <label for="inputEmail" class="sr-only">{{ __('admin.email') }}</label>
                     <input type="email" name="email" id="inputEmail" class="form-control form-control-lg"
-                        placeholder="Email address" required="" autofocus="">
+                        placeholder="{{ __('admin.email') }}" autofocus="">
+                        <x-validation-message field="email" />
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('admin.send') }}</button>
             </form>
         </div>
     </div>

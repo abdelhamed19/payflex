@@ -6,62 +6,58 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\ResetPasswordMail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\{DB, Auth, Mail};
+use App\Http\Requests\Admin\Auth\{ForgetRequest, LoginRequest, RegisterRequest};
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        // Validate the request data
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
-
-        // Attempt to log the user in
+        $data = $request->validated();
         if (auth()->attempt($request->only('email', 'password'))) {
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $data['email'])->first();
             Auth::login($user);
             return redirect()->route('index')->with('success', 'Login successful!');
         }
-
         return redirect()->back()->withErrors(['email' => 'Invalid credentials.']);
     }
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        // Validate the request data
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-        ]);
-
-        // Create a new user
-        $user = \App\Models\User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        // Log the user in
-        auth()->login($user);
-
-        return redirect()->route('index')->with('success', 'Registration successful!');
+        $data = $request->validated();
+        try {
+            DB::beginTransaction();
+            $user = User::create($data);
+            auth()->login($user);
+            DB::commit();
+            return redirect()->route('index')->with('success', 'Registration successful!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Registration failed. Please try again.');
+        }
     }
-    public function resetPassword(Request $request)
+    public function resetPassword(ForgetRequest $request)
     {
-        $user = User::where('email',$request->email)->first();
+        $data = $request->validated();
+        $user = User::where('email', $data['email'])->first();
         if ($user) {
-            $newPass = Str::random(12);
-            $user->password = Hash::make($newPass);
-            $user->save();
-            Mail::to($user->email)->send(new ResetPasswordMail($user,$newPass));
+            $newPass = Str::random(15);
+            try {
+                DB::beginTransaction();
+                $user->password = $newPass;
+                $user->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Failed to reset password. Please try again.');
+            }
+            Mail::to($user->email)->send(new ResetPasswordMail($user, $newPass));
             return redirect()->back()->with('success', 'New password has been sent to your email.');
         }
-        return redirect()->back()->with('error','Email not found.');
+        return redirect()->back()->with('error', 'Email not found.');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Logout successful!');
     }
 }
