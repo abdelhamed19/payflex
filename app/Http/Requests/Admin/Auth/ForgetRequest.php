@@ -23,7 +23,7 @@ class ForgetRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
         ];
     }
 }

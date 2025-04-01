@@ -43,30 +43,31 @@
                 </a>
                 <h1 class="h6 mb-3"></h1>
                 <div class="form-group">
-                    <label for="inputEmail" class="sr-only">{{ __('admin.email') }}</label>
+                    <label for="inputEmail" class="sr-only">{{ __('auth.email') }}</label>
                     <input type="email" id="inputEmail" name="email" value="{{ old('email') }}" class="form-control form-control-lg"
-                        placeholder="{{ __('admin.email') }}" autofocus="">
+                        placeholder="{{ __('auth.email') }}" autofocus="">
+                        <x-validation-message field='email' />
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword" class="sr-only">{{ __('admin.password') }}</label>
+                    <label for="inputPassword" class="sr-only">{{ __('auth.password') }}</label>
                     <input type="password" name="password" id="inputPassword" class="form-control form-control-lg"
-                        placeholder="{{ __('admin.password') }}" >
+                        placeholder="{{ __('auth.password') }}" >
                 </div>
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> {{ __('admin.remember_me') }} </label>
+                        <input type="checkbox" value="remember-me"> {{ __('auth.remember_me') }} </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">{{ __('admin.login') }}</button>
+                <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">{{ __('auth.login') }}</button>
 
                 <!-- زر نسيان كلمة المرور -->
                 <div class="mb-3">
-                    <a href="reset-password" class="text-muted">{{ __('admin.forgot_password') }}</a>
+                    <a href="forget-password" class="text-muted">{{ __('auth.forgot_password') }}</a>
                 </div>
 
                 <!-- زر التسجيل -->
                 <div class="border-top pt-3">
-                    <p class="text-muted"> {{ __('admin.have_account') }}
-                        <a href="register" class="btn btn-outline-secondary btn-sm">{{ __('admin.register') }}</a>
+                    <p class="text-muted"> {{ __('auth.have_account') }}
+                        <a href="register" class="btn btn-outline-secondary btn-sm">{{ __('auth.register') }}</a>
                     </p>
                 </div>
             </form>

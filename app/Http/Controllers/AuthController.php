@@ -3,23 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use GuzzleHttp\Psr7\Header;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Traits\ResponseTrait;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\{DB, Auth, Mail};
 use App\Http\Requests\Admin\Auth\{ForgetRequest, LoginRequest, RegisterRequest};
+use App\Models\Country;
 
 class AuthController extends Controller
 {
+    use ResponseTrait;
     public function login(LoginRequest $request)
     {
         $data = $request->validated();
         if (auth()->attempt($request->only('email', 'password'))) {
             $user = User::where('email', $data['email'])->first();
             Auth::login($user);
-            return redirect()->route('index')->with('success', 'Login successful!');
+            return redirect()->route('home')->with('success', __('auth.login_success'));
         }
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials.']);
+        return redirect()->back()->withErrors(['email' => __('auth.login_failed')]);
     }
     public function register(RegisterRequest $request)
     {
@@ -29,13 +32,13 @@ class AuthController extends Controller
             $user = User::create($data);
             auth()->login($user);
             DB::commit();
-            return redirect()->route('index')->with('success', 'Registration successful!');
+            return redirect()->route('index')->with('success', __('auth.registration_success'));
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Registration failed. Please try again.');
+            return redirect()->back()->with('error', __('auth.registration_failed'));
         }
     }
-    public function resetPassword(ForgetRequest $request)
+    public function forgetPassword(ForgetRequest $request)
     {
         $data = $request->validated();
         $user = User::where('email', $data['email'])->first();
@@ -48,16 +51,19 @@ class AuthController extends Controller
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect()->back()->with('error', 'Failed to reset password. Please try again.');
+                return redirect()->back()->with('error', __('auth.password_reset_failed'));
             }
             Mail::to($user->email)->send(new ResetPasswordMail($user, $newPass));
-            return redirect()->back()->with('success', 'New password has been sent to your email.');
+            return redirect()->back()->with('success', __('auth.password_reset_success'));
         }
-        return redirect()->back()->with('error', 'Email not found.');
     }
-    public function logout(Request $request)
+    public function logout()
     {
-        Auth::logout();
-        return redirect()->route('login')->with('success', 'Logout successful!');
+        try {
+            Auth::logout();
+            return redirect()->route('login')->with('success', __('auth.logout_success'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('auth.logout_failed'));
+        }
     }
 }

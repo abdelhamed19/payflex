@@ -7,6 +7,7 @@
                 <p>{{ __('admin.parent_section') }}</p>
             </div>
             <div class="row">
+                <x-flash-message />
                 <div class="col-md-12">
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -42,30 +43,6 @@
                                                     <input type="text" class="form-control" name="name[en]" placeholder="Orders"
                                                         value="{{ old('name.en') }}">
                                                          <x-validation-message field="name.en" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Route & Route Name -->
-                                    <div class="col-md-12">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="route">{{ __('admin.route') }}</label>
-                                                        <input type="text" class="form-control" name="route" placeholder="section/create/"
-                                                            value="{{ old('route') }}">
-                                                            <x-validation-message field="route" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="route_name">{{ __('admin.route_name') }}</label>
-                                                        <input type="text" class="form-control" name="route_name" placeholder="section.create"
-                                                            value="{{ old('route_name') }}">
-                                                            <x-validation-message field="route_name" />
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

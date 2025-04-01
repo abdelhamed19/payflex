@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sidebar extends BaseModel
 {
@@ -20,5 +21,13 @@ class Sidebar extends BaseModel
            return strtolower(trim($val));
         },$value);
         $this->attributes['name'] = json_encode($trimed, JSON_UNESCAPED_UNICODE);
+    }
+    protected static function booted()
+    {
+        static::creating(function($sidebar){
+            $name = json_decode($sidebar->name, true)['en'];
+            $name = strtolower(trim($name));
+            $sidebar->route = '/'.$name. '/' . 'index';
+        });
     }
 }

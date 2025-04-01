@@ -15,13 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="form-group">
                                 <label>${translations.name_ar}</label>
                                 <input type="text" class="form-control" name="child_sections[${childCount}][name][ar]" placeholder="الاوردرات" required>
+                                 <x-validation-message field="child_sections.*.name.ar" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>${translations.name_en}</label>
                                 <input type="text" class="form-control" name="child_sections[${childCount}][name][en]" placeholder="Orders" required>
-                            </div>
+                            <x-validation-message field="child_sections.*.name.en" />
+                                </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -61,3 +63,19 @@ document.addEventListener("DOMContentLoaded", function () {
         element.closest(".child-section").remove();
     };
 });
+
+function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+        var output = document.getElementById('profileImagePreview');
+        output.src = reader.result;
+        document.getElementById('removeImageButton').style.display = "block"; // إظهار زر X عند تحديد صورة
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+function removeImage() {
+    document.getElementById('profileImagePreview').src = "{{ asset('admin/light/assets/avatars/face-1.jpg') }}";
+    document.getElementById('profileImageInput').value = "";
+    document.getElementById('removeImageButton').style.display = "none"; // إخفاء زر X عند إزالة الصورة
+}

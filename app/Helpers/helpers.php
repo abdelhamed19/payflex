@@ -93,6 +93,7 @@ EOD;
             File::put($routeFilePath, $routeFileContent);
         }
     }
+    Artisan::call('optimize');
 }
 function createRequestFiles($sectionName)
 {
@@ -180,6 +181,5 @@ function createSeeder($sectionName)
     // إنشاء الـ seeder إذا لم يكن موجودًا
     if (!file_exists($seederPath)) {
         Artisan::call("make:seeder {$seederName}");
-        Artisan::call("optimize");
     }
 }

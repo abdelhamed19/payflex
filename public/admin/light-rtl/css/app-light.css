@@ -14063,6 +14063,26 @@ svg.navbar-brand-img {
 .custom-select {
     background: #ffffff;
 }
+.custom-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.end-0 {
+    right: 0;
+}
+
 
 /* quill */
 .ql-toolbar.ql-snow {

@@ -29,7 +29,7 @@
 
     <div class="wrapper vh-700">
         <div class="row align-items-center h-100">
-            <form action="{{ route('send.reset.password') }}" method="POST" class="col-lg-3 col-md-4 col-10 mx-auto text-center">
+            <form action="{{ route('reset.password') }}" method="POST" class="col-lg-3 col-md-4 col-10 mx-auto text-center">
                 @csrf
                 <div class="mx-auto text-center my-4">
                     <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{{ request()->url() }}">
@@ -43,16 +43,16 @@
                             </g>
                         </svg>
                     </a>
-                    <h2 class="my-3">{{ __('admin.reset_password') }}</h2>
+                    <h2 class="my-3">{{ __('auth.reset_password') }}</h2>
                 </div>
-                <p class="text-muted">{{ __('admin.password_reset_instructions') }}</p>
+                <p class="text-muted">{{ __('auth.password_reset_instructions') }}</p>
                 <div class="form-group">
-                    <label for="inputEmail" class="sr-only">{{ __('admin.email') }}</label>
+                    <label for="inputEmail" class="sr-only">{{ __('auth.email') }}</label>
                     <input type="email" name="email" id="inputEmail" class="form-control form-control-lg"
-                        placeholder="{{ __('admin.email') }}" autofocus="">
+                        placeholder="{{ __('auth.email') }}" autofocus="">
                         <x-validation-message field="email" />
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('admin.send') }}</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('auth.send') }}</button>
             </form>
         </div>
     </div>

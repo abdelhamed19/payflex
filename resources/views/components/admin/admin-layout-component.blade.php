@@ -51,7 +51,7 @@
         </main> <!-- main -->
     </div> <!-- .wrapper -->
     <script src="{{ asset("admin/$path/js/jquery.min.js") }}"></script>
-    {{-- <script src="{{ asset("admin/$path/js/general.js") }}"></script> --}}
+    <script src="{{ asset("admin/$path/js/general.js") }}"></script>
     <script src="{{ asset("admin/$path/js/popper.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/moment.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/bootstrap.min.js") }}"></script>

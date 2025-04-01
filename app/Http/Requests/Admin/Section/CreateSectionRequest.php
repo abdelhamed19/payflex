@@ -19,14 +19,15 @@ class CreateSectionRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name.*' => ['required', 'string', 'max:255', new ValidSectionNameRule()],
+            'name.en' => ['required', 'string', 'max:255', new ValidSectionNameRule()],
             'icon' => 'required|string|max:255',
-            'route_name' => 'nullable|string|max:255',
-            'route' => [
+            'is_active' => 'required|boolean',
+            'child_sections.*.name.*' => 'required|string|max:255',
+            'child_sections.*.icon' => 'nullable|string|max:255',
+            'child_sections.*.route' => [
                 'nullable',
                 'string',
                 'max:255',
-
                 function ($attribute, $value, $fail) {
                     if (isset($value)) {
                         if (!preg_match('/^\//', $value)) {
@@ -38,10 +39,6 @@ class CreateSectionRequest extends BaseRequest
                     }
                 },
             ],
-            'is_active' => 'required|boolean',
-            'child_sections.*.name.*' => 'required|string|max:255',
-            'child_sections.*.icon' => 'nullable|string|max:255',
-            'child_sections.*.route' => 'nullable|string|max:255',
             'child_sections.*.route_name' => 'nullable|string|max:255',
             'child_sections.*.is_active' => 'required|boolean',
         ];

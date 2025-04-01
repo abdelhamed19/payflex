@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Auth;
 
 use App\Http\Requests\BaseRequest;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends BaseRequest
@@ -26,7 +27,11 @@ class RegisterRequest extends BaseRequest
             'first_name' => 'required|min:2|max:15',
             'last_name' => 'required|min:2|max:15',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
+            'password' => ['required', 'confirmed', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()],
         ];
     }
 }

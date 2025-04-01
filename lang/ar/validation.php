@@ -60,5 +60,13 @@ return [
         'regex_slash' => 'يجب أن يبدأ :attribute بشرطة مائلة (/).',
         'regex_num' => 'يجب أن يحتوي :attribute على أحرف وأرقام وشرطات سفلية وشرطات مائلة فقط.',
     ],
+    'password' => [
+        'letters' => 'يجب أن يحتوي :attribute على حرف واحد على الأقل.',
+        'mixed' => 'يجب أن يحتوي :attribute على حرف كبير واحد على الأقل وحرف صغير واحد على الأقل.',
+        'numbers' => 'يجب أن يحتوي :attribute على رقم واحد على الأقل.',
+        'symbols' => 'يجب أن يحتوي :attribute على رمز واحد على الأقل.',
+        'uncompromised' => 'تم العثور على :attribute في تسرب بيانات. يرجى اختيار :attribute مختلف.',
+        'min' => 'يجب أن يحتوي :attribute على الأقل :min حرفًا.',
+    ]
     // 'The ' . $attribute . ' must start with a forward slash (/).'
 ];

@@ -11,6 +11,9 @@ class SidebarChildren extends BaseModel
     protected $guarded = [];
     public function setNameAttribute($value)
     {
-        $this->attributes['name'] = json_encode($value, JSON_UNESCAPED_UNICODE);
+        $trimed = array_map(function($val){
+           return strtolower(trim($val));
+        },$value);
+        $this->attributes['name'] = json_encode($trimed, JSON_UNESCAPED_UNICODE);
     }
 }

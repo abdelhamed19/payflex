@@ -7,7 +7,6 @@ use App\Models\SidebarChildren;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Section\CreateSectionRequest;
-use Illuminate\Support\Facades\Artisan;
 
 class SectionController extends Controller
 {
@@ -29,19 +28,18 @@ class SectionController extends Controller
                 }
             }
             DB::commit();
-            $sectionName = json_decode($Sidebar->name, true)['en'];
-            createSectionViews($sectionName);
-            createModelWithMigration($sectionName);
-            createRequestFiles($sectionName);
-            createController($sectionName);
-            appendRoutes($sectionName);
-            createSeeder($sectionName);
-            return redirect()->route('index')->with('success', 'Section created successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
             return redirect()->back()->with('error', 'Error creating section: ' . $e->getMessage());
         }
+        $sectionName = json_decode($Sidebar->name, true)['en'];
+        createSectionViews($sectionName);
+        createModelWithMigration($sectionName);
+        createRequestFiles($sectionName);
+        createController($sectionName);
+        appendRoutes($sectionName);
+        createSeeder($sectionName);
+        return back()->with('success', 'Section created successfully');
     }
 
 }

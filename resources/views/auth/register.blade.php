@@ -42,26 +42,26 @@
                                 </g>
                             </svg>
                         </a>
-                        <h2 class="my-3">{{ __('admin.register') }}</h2>
+                        <h2 class="my-3">{{ __('auth.register') }}</h2>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail4">{{ __('admin.email') }}</label>
+                        <label for="inputEmail4">{{ __('auth.email') }}</label>
                         <input type="email" name="email" value="{{ old('email') }}"
-                        class="form-control" id="inputEmail4" placeholder="{{ __('admin.email') }}">
+                        class="form-control" id="inputEmail4" placeholder="{{ __('auth.email') }}">
                         <x-validation-message field="email" />
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="firstname">{{ __('admin.first_name') }}</label>
+                            <label for="firstname">{{ __('auth.first_name') }}</label>
                             <input type="text" name="first_name" value="{{ old('first_name') }}"
-                             id="firstname" class="form-control" placeholder="{{ __('admin.first_name') }}">
+                             id="firstname" class="form-control" placeholder="{{ __('auth.first_name') }}">
                             <x-validation-message field="first_name" />
 
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="lastname">{{ __('admin.last_name') }}</label>
+                            <label for="lastname">{{ __('auth.last_name') }}</label>
                             <input type="text" name="last_name" value="{{ old('last_name') }}"
-                            id="lastname" class="form-control" placeholder="{{ __('admin.last_name') }}">
+                            id="lastname" class="form-control" placeholder="{{ __('auth.last_name') }}">
                             <x-validation-message field='last_name' />
 
                         </div>
@@ -70,32 +70,32 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="inputPassword5">{{ __('admin.password') }}</label>
+                                <label for="inputPassword5">{{ __('auth.password') }}</label>
                                 <input type="password" name="password" class="form-control"
-                                id="inputPassword5" placeholder="{{ __('admin.password') }}">
+                                id="inputPassword5" placeholder="{{ __('auth.password') }}">
                                 <x-validation-message field='password' />
                             </div>
                             <div class="form-group">
-                                <label for="inputPassword6">{{ __('admin.confirm_password') }}</label>
+                                <label for="inputPassword6">{{ __('auth.confirm_password') }}</label>
                                 <input type="password" name="password_confirmation"
-                                 class="form-control" id="inputPassword6" placeholder="{{ __('admin.confirm_password') }}">
+                                 class="form-control" id="inputPassword6" placeholder="{{ __('auth.confirm_password') }}">
                                 <x-validation-message field='password_confirmation' />
 
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <p class="mb-2">{{ __('admin.password_requirements') }}</p>
-                            <p class="small text-muted mb-2"> {{ __('admin.password_requirements_description') }} </p>
+                            <p class="mb-2">{{ __('auth.password_requirements') }}</p>
+                            <p class="small text-muted mb-2"> {{ __('auth.password_requirements_description') }} </p>
                             <ul class="small text-muted pl-4 mb-0">
-                                <li>{{ __('admin.password_min_length') }}</li>
-                                <li>{{ __('admin.password_special_character') }}</li>
-                                <li>{{ __('admin.password_number') }}</li>
-                                <li>{{ __('admin.password_not_previous') }}</li>
+                                <li>{{ __('auth.password_min_length') }}</li>
+                                <li>{{ __('auth.password_special_character') }}</li>
+                                <li>{{ __('auth.password_number') }}</li>
+                                {{-- <li>{{ __('auth.password_not_previous') }}</li> --}}
                             </ul>
                         </div>
 
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">{{ __('admin.register') }}</button>
+                    <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">{{ __('auth.register') }}</button>
                 </form>
             </div>
         </div>
