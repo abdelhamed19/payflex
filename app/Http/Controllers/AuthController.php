@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\DuplicatedEmailException;
 use App\Models\User;
-use GuzzleHttp\Psr7\Header;
 use Illuminate\Support\Str;
 use App\Traits\ResponseTrait;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\{DB, Auth, Mail};
 use App\Http\Requests\Admin\Auth\{ForgetRequest, LoginRequest, RegisterRequest};
-use App\Models\Country;
+use App\Services\Thirdparty\OAuthService;
 
 class AuthController extends Controller
 {
-    use ResponseTrait;
+    private $oAuthService;
+    public function __construct(OAuthService $oAuthService)
+    {
+        $this->oAuthService = $oAuthService;
+    }
     public function login(LoginRequest $request)
     {
         $data = $request->validated();
@@ -65,5 +69,45 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', __('auth.logout_failed'));
         }
+    }
+    public function redirectToProvider($provider)
+    {
+        $url = $this->oAuthService->getRedirectUrl($provider);
+        if ($url) {
+            return redirect($url);
+        }
+        return redirect()->back()->with('error', __('auth.provider_not_supported'));
+    }
+    public function handleProviderCallback($provider)
+    {
+        $response = $this->oAuthService->handleProviderCallback($provider);
+        if ($response != false) {
+            $email = $response['email'] ?? $response['login'] . '@github.com';
+
+            if (User::where('email', $email)->exists()) {
+                return redirect()->back()->with('error', __('auth.email_exists'));
+            }
+
+            $user = User::where('provider_id', $response['id'])->first();
+            if (!$user) {
+                try {
+                    DB::beginTransaction();
+                    $user = User::create([
+                        'provider_id' => $response['id'],
+                        'provider' => $provider,
+                        'first_name' => $response['name'],
+                        'email' => $email,
+                        'password' => Str::random(15),
+                    ]);
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', $e->getMessage());
+                }
+            }
+            Auth::login($user);
+            return redirect()->route('home')->with('success', __('auth.login_success'));
+        }
+        return redirect()->back()->with('error', __('auth.login_failed'));
     }
 }

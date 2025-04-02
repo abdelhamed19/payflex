@@ -9,6 +9,7 @@
     <title>@yield('title' ?? 'Dashboard')</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset("admin/$path/css/simplebar.css") }}">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <!-- Fonts CSS -->
     <link

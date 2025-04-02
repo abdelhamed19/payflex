@@ -5,7 +5,6 @@
             <h2 class="page-title">{{ __('admin.profile') }}</h2>
             <x-flash-message />
             <div class="row">
-
                 <div class="col-md-12">
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -127,7 +126,7 @@
                                 <!-- Submit Button -->
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-primary">{{ __('admin.submit') }}</button>
-                                    <a href="/" class="btn btn-danger ml-3">
+                                    <a href="/home" class="btn btn-danger ml-3">
                                         {{ __('admin.cancel') }}
                                     </a>
                                 </div>

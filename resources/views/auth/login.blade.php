@@ -58,7 +58,18 @@
                         <input type="checkbox" value="remember-me"> {{ __('auth.remember_me') }} </label>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">{{ __('auth.login') }}</button>
-
+                <div class="mb-3">
+                    <p>{{ __('auth.login_with_provider') }}</p>
+                    <a href="{{ route('provider.redirect','google') }}" class="btn btn-danger btn-block mb-2">
+                        <i class="fab fa-google"></i> {{ __('auth.login_with', ['provider' => __('auth.google')]) }}
+                    </a>
+                    <a href="{{ route('provider.redirect','facebook') }}" class="btn btn-primary btn-block">
+                        <i class="fab fa-facebook"></i> {{ __('auth.login_with', ['provider' => __('auth.facebook')]) }}
+                    </a>
+                    <a href="{{ route('provider.redirect','github') }}" class="btn btn-secondary btn-block">
+                        <i class="fab fa-github"></i> {{ __('auth.login_with', ['provider' => __('auth.github')]) }}
+                    </a>
+                </div>
                 <!-- زر نسيان كلمة المرور -->
                 <div class="mb-3">
                     <a href="forget-password" class="text-muted">{{ __('auth.forgot_password') }}</a>

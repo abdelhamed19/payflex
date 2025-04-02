@@ -46,4 +46,6 @@ return [
     'arabic' => 'العربية',
     'profile_updated_successfully' => 'تم تحديث الملف الشخصي بنجاح',
 
+
+
 ];

@@ -25,15 +25,15 @@ class UpdateProfile extends BaseRequest
         return [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
+            'lang' => ['nullable','min:2','in:ar,en'],
             'email' => ['required','email', 'unique:users,email,' . $this->user()->id],
-            'password' => ['required','confirmed', Password::min(8)
+            'password' => ['nullable','confirmed', Password::min(8)
             ->letters()
             ->mixedCase()
             ->numbers()
             ->symbols()],
             'phone' => 'nullable|string|max:15',
             'address' => 'nullable|string|max:255',
-            'lang' => 'nullable|string|max:2',
         ];
     }
 }

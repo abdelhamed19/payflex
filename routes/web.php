@@ -46,3 +46,6 @@ Route::view('forget-password', 'auth.reset-password');
 Route::post('login', [AuthController::class, 'login'])->name('send.login');
 Route::post('register', [AuthController::class, 'register'])->name('send.register');
 Route::post('reset-password', [AuthController::class, 'forgetPassword'])->name('reset.password');
+
+Route::get('{provider}/redirect',[AuthController::class, 'redirectToProvider'])->name('provider.redirect');
+Route::get('{provider}/callback',[AuthController::class, 'handleProviderCallback'])->name('provider.callback');

@@ -46,4 +46,6 @@ return [
     'english' => 'English',
     'arabic' => 'Arabic',
     'profile_updated_successfully' => 'Profile updated successfully',
+    'profile_update_failed' => 'Profile update failed',
+    'profile_image' => 'Profile Image',
 ];
