@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\DuplicatedEmailException;
 use App\Models\User;
+use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
 use App\Mail\ResetPasswordMail;
+use App\Services\Thirdparty\OAuthService;
+use App\Exceptions\DuplicatedEmailException;
 use Illuminate\Support\Facades\{DB, Auth, Mail};
 use App\Http\Requests\Admin\Auth\{ForgetRequest, LoginRequest, RegisterRequest};
-use App\Services\Thirdparty\OAuthService;
 
 class AuthController extends Controller
 {
+    use UploadTrait;
     private $oAuthService;
     public function __construct(OAuthService $oAuthService)
     {
@@ -109,5 +112,15 @@ class AuthController extends Controller
             return redirect()->route('home')->with('success', __('auth.login_success'));
         }
         return redirect()->back()->with('error', __('auth.login_failed'));
+    }
+    public function test(Request $request)
+    {
+        $file = $request->file('file');
+        $res = $this->uploadFile($file, 'images');
+        return $res;
+    }
+    public function delete()
+    {
+      return $this->deleteFile('public/images/1743608169_photo_2025-01-22_21-08-37.jpg');
     }
 }

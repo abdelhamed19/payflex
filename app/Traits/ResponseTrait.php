@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\File;
+use function PHPUnit\Framework\directoryExists;
+
 trait ResponseTrait
 {
     private $codes = [
@@ -37,4 +40,12 @@ trait ResponseTrait
             'message' => $message,
         ], $this->codes['unauthorized']);
     }
+    public function notFoundResponse($message)
+    {
+        return response()->json([
+            'key' => __('admin.failed'),
+            'message' => $message,
+        ], $this->codes['not_found']);
+    }
+
 }

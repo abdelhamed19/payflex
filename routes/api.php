@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('all-users',[AuthController::class,'allUsers'])->name('all.users');
+Route::post('test',[AuthController::class,'test'])->name('all.users');
+Route::get('delete',[AuthController::class,'delete'])->name('delete');
