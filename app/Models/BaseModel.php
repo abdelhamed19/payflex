@@ -33,4 +33,28 @@ class BaseModel extends Model
             return $value;
         }
     }
+    public function getImageAttribute($value)
+    {
+        if ($this->attributes['image'] != null) {
+            return asset('storage/' . $this->attributes['image']);
+        } else {
+            return asset('/storage/admin/default.jpg');
+        }
+    }
+    // public function getImagePathAttribute($value)
+    // {
+    //     if ($this->attributes['image'] != null) {
+    //         return 'storage/' . $this->attributes['image'];
+    //     } else {
+    //         return 'storage/admin/default.jpg';
+    //     }
+    // }
+    // public function setImageAttribute($value)
+    // {
+    //     if ($this->attributes['image'] != null && $this->attributes['image']) {
+    //         $this->attributes['image'] = $value;
+    //     } else {
+    //         $this->attributes['image'] = $value->store('images', 'public');
+    //     }
+    // }
 }

@@ -28,7 +28,7 @@
         })
         .then(data => {
             if (data.success) {
-                showToast('success', 'تم التحديث بنجاح!');
+                showToast('success', data.message || 'تم التحديث بنجاح!');
             } else {
                 element.checked = !originalState;
                 showToast('error', data.message || 'حدث خطأ أثناء التحديث!');

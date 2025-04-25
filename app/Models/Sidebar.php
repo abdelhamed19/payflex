@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sidebar extends BaseModel
@@ -22,12 +20,26 @@ class Sidebar extends BaseModel
         },$value);
         $this->attributes['name'] = json_encode($trimed, JSON_UNESCAPED_UNICODE);
     }
+    public function setRouteAttribute($value)
+    {
+        $this->attributes['route'] = '/admin'.$value;
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'sidebar_role', 'sidebar_id', 'role_id');
+    }
     protected static function booted()
     {
         static::creating(function($sidebar){
             $name = json_decode($sidebar->name, true)['en'];
             $name = strtolower(trim($name));
             $sidebar->route = '/'.$name. '/' . 'index';
+        });
+        static::addGlobalScope('role_id', function ($builder) {
+            $user = auth()->user();
+            return $builder->whereHas('roles', function ($query) use ($user) {
+                $query->where('role_id', $user->role_id);
+            });
         });
     }
 }

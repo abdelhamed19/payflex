@@ -55,13 +55,13 @@ class SettingController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Status updated successfully!',
+                'message' => __('admin.status_updated_successfully'),
                 'new_status' => $record->is_active
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'An error occurred!',
+                'message' => __('admin.status_update_failed'),
                 'error' => $e->getMessage()
             ], 500);
         }

@@ -1,10 +1,10 @@
 <x-admin.admin-layout-component>
-    @section('title', 'Countries')
+    @section('title', 'Roles')
     @section('content')
         <div class="row">
             <!-- Striped rows -->
             <div class="col-md-12 my-4">
-                <h2 class="h4 mb-1">{{ __('admin.countries') }}</h2>
+                <h2 class="h4 mb-1">{{ __('admin.roles') }}</h2>
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="toolbar row mb-3">
@@ -43,12 +43,12 @@
                                     </th>
                                     <th>{{ __('admin.id') }}</th>
                                     <th>{{ __('admin.name') }}</th>
-                                    <th>{{ __('admin.status') }}</th> <!-- إضافة عنوان العمود -->
+                                    <th>{{ __('admin.status') }}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($countries as $country)
+                                @forelse ($roles as $role)
                                     <tr>
                                         <td>
                                             <div class="custom-control custom-checkbox">
@@ -56,24 +56,27 @@
                                                 <label class="custom-control-label" for="4574"></label>
                                             </div>
                                         </td>
-                                        <td>{{ $country->id }}</td>
-                                        <td>{{ $country->getTranslation($country->name) }}</td>
+                                        <td>{{ $role->id }}</td>
+                                        <td>{{ $role->getTranslation($role->name) }}</td>
                                         <td>
-                                            <x-admin.toggle-switch :id="$country->id" :isActive="$country->is_active" model="Country" />
+                                            <x-admin.toggle-switch :id="$role->id" :isActive="$role->is_active" model="Role" />
                                         </td>
-
                                         <td>
                                             <a href="" role="button" class="btn mb-2 btn-secondary btn-sm">{{ __('admin.edit') }}</a>
                                             <a href="" role="button" class="btn mb-2 btn-danger btn-sm">{{ __('admin.delete') }}</a>
                                             <a href="" role="button" class="btn mb-2 btn-warning btn-sm">{{ __('admin.view') }}</a>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">{{ __('admin.no_data_found') }}</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         <nav aria-label="Table Paging" class="mb-0 text-muted">
                             <ul class="pagination justify-content-end mb-0">
-                                {{ $countries->links() }}
+                                {{ $roles->links() }}
 
                             </ul>
                         </nav>

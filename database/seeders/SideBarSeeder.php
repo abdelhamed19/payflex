@@ -18,7 +18,7 @@ class SideBarSeeder extends Seeder
                 'en' => 'Home'
             ], JSON_UNESCAPED_UNICODE),
             'icon' => 'fe fe-home fe-16',
-            'route' => '/',
+            'route' => '/admin/home',
             'route_name' => 'home',
         ]);
         DB::table('sidebars')->insert([
@@ -27,7 +27,7 @@ class SideBarSeeder extends Seeder
                 'en' => 'Sections'
             ], JSON_UNESCAPED_UNICODE),
             'icon' => 'fe fe-layers fe-16',
-            'route' => '/sections/create',
+            'route' => '/admin/sections/create',
             'route_name' => 'sections.create',
         ]);
         DB::table('sidebars')->insert([
@@ -44,7 +44,7 @@ class SideBarSeeder extends Seeder
                 'en' => 'Countries'
             ], JSON_UNESCAPED_UNICODE),
             'icon' => 'fe fe-globe fe-16',
-            'route' => '/countries',
+            'route' => '/admin/countries',
             'route_name' => 'countries.index',
         ]);
         DB::table('sidebar_childrens')->insert([
@@ -54,7 +54,7 @@ class SideBarSeeder extends Seeder
                 'en' => 'Regions'
             ], JSON_UNESCAPED_UNICODE),
             'icon' => 'fe fe-map-pin fe-16',
-            'route' => '/regions',
+            'route' => '/admin/regions',
             'route_name' => 'regions.index',
         ]);
         DB::table('sidebar_childrens')->insert([
@@ -64,8 +64,44 @@ class SideBarSeeder extends Seeder
                 'en' => 'Cities'
             ], JSON_UNESCAPED_UNICODE),
             'icon' => 'fe fe-map fe-16',
-            'route' => '/cities',
+            'route' => '/admin/cities',
             'route_name' => 'cities.index',
+        ]);
+        DB::table('sidebars')->insert([
+            'name' => json_encode([
+                'ar' => 'الأدوار والصلاحيات',
+                'en' => 'Roles & Permissions'
+            ], JSON_UNESCAPED_UNICODE),
+            'icon' => 'fe fe-lock fe-16',
+            'route' => '/admin/roles',
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 2, // sections
+            'role_id' => 1,
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 1, // home
+            'role_id' => 1,
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 1, // home
+            'role_id' => 2,
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 1, // home
+            'role_id' => 3,
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 1, // home
+            'role_id' => 4,
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 4, // roles
+            'role_id' => 1,
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 4, // roles
+            'role_id' => 2,
         ]);
     }
 }

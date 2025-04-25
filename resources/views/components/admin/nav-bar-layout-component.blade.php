@@ -37,12 +37,12 @@
             <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink"
                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="avatar avatar-sm mt-2">
-                    <img src="{{ asset('admin/light/assets/avatars/face-1.jpg') }}" alt="..."
+                    <img src="{{ Auth::user()->image }}" alt="..."
                         class="avatar-img rounded-circle">
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/profile">{{ __('admin.profile') }}</a>
+                <a class="dropdown-item" href="/admin/profile">{{ __('admin.profile') }}</a>
                 <a class="dropdown-item" href="#">{{ __('admin.settings') }}</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

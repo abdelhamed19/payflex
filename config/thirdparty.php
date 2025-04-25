@@ -32,5 +32,14 @@ return [
             'access_token_url' => 'https://github.com/login/oauth/access_token',
             'user_info_url' => 'https://api.github.com/user',
         ]
-    ]
+        ],
+    'payments' => [
+        'paymob' => [
+            'api_key' => env('PAYMOB_API_KEY'),
+            'card_integration_id' => env('PAYMOB_CARD_INTEGRATION_ID'),
+            'mobile_integration_id' => env('PAYMOB_MOBILE_INTEGRATION_ID'),
+            'paypal_integration_id' => env('PAYMOB_PAYPAL_INTEGRATION_ID'),
+            'api_secret_key' => env('PAYMOB_API_SECRET'),
+        ],
+    ],
 ];

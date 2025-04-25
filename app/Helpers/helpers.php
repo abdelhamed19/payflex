@@ -66,6 +66,7 @@ function appendRoutes($sectionName)
         $routeFileContent = preg_replace('/<\?php\s*/', "<?php\n\nuse {$controllerNamespace};\n", $routeFileContent, 1);
     }
 
+
     // تحديد المسارات المطلوب إضافتها داخل المجموعة
     $routes = <<<EOD
 
@@ -80,7 +81,7 @@ function appendRoutes($sectionName)
 EOD;
 
     // البحث عن موضع المجموعة
-    $pattern = '/Route::middleware\(\'auth\'\)->group\(function\s*\(\)\s*\{/';
+    $pattern = '/Route::prefix\(\'admin\'\)->middleware\(\[\'auth\'\,\'check-role\'\]\)->group\(function\s*\(\)\s*\{/';
     if (preg_match($pattern, $routeFileContent, $matches, PREG_OFFSET_CAPTURE)) {
         // العثور على نهاية المجموعة
         $closingBracketPos = strrpos($routeFileContent, '});');

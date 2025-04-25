@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Sidebar;
-use App\Models\SidebarChildren;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,8 +18,10 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             RegionSeeder::class,
             CitySeeder::class,
+            RolesSeeder::class,
             SideBarSeeder::class,
-            // OrderSeeder::class,
+            UserSeeder::class,
         ]);
+
     }
 }

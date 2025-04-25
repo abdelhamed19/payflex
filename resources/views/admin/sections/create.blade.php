@@ -6,8 +6,9 @@
             <div class="page-subtitle">
                 <p>{{ __('admin.parent_section') }}</p>
             </div>
+            <x-flash-message />
             <div class="row">
-                <x-flash-message />
+
                 <div class="col-md-12">
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -23,9 +24,9 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="arabicName">Name (AR)</label>
-                                                    <input type="text" class="form-control" name="name[ar]" placeholder="الاوردرات"
-                                                        value="{{ old('name.ar') }}">
-                                                        <x-validation-message field="name.ar" />
+                                                    <input type="text" class="form-control" name="name[ar]"
+                                                        placeholder="الاوردرات" value="{{ old('name.ar') }}">
+                                                    <x-validation-message field="name.ar" />
                                                 </div>
                                             </div>
                                         </div>
@@ -40,9 +41,9 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="englishName">Name (EN)</label>
-                                                    <input type="text" class="form-control" name="name[en]" placeholder="Orders"
-                                                        value="{{ old('name.en') }}">
-                                                         <x-validation-message field="name.en" />
+                                                    <input type="text" class="form-control" name="name[en]"
+                                                        placeholder="Orders" value="{{ old('name.en') }}">
+                                                    <x-validation-message field="name.en" />
                                                 </div>
                                             </div>
                                         </div>
@@ -56,10 +57,12 @@
                                                     <div class="form-group">
                                                         <label for="status">{{ __('admin.status') }}</label>
                                                         <select class="form-control" name="is_active">
-                                                            <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>
+                                                            <option value="1"
+                                                                {{ old('status') == 1 ? 'selected' : '' }}>
                                                                 {{ __('admin.active') }}
                                                             </option>
-                                                            <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>
+                                                            <option value="0"
+                                                                {{ old('status') == 0 ? 'selected' : '' }}>
                                                                 {{ __('admin.inactive') }}
                                                             </option>
                                                         </select>
@@ -68,8 +71,27 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="icon">{{ __('admin.icon') }}</label>
-                                                        <input type="text" class="form-control" name="icon" placeholder="nav-item nav-notif"
-                                                            value="{{ old('icon') }}">
+                                                        <input type="text" class="form-control" name="icon"
+                                                            placeholder="nav-item nav-notif" value="{{ old('icon') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="status">{{ __('admin.visiable_to') }}</label>
+                                                        <select class="form-control" name="role_ids[]" multiple>
+                                                            @foreach ($roles as $role)
+                                                                <option value="{{ $role->id }}">
+                                                                    {{ $role->getTranslation($role->name) }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,7 +114,7 @@
                                 <!-- Submit Button -->
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-primary">{{ __('admin.submit') }}</button>
-                                    <a href="/" class="btn btn-danger ml-3">
+                                    <a href="/admin/home" class="btn btn-danger ml-3">
                                         {{ __('admin.cancel') }}
                                     </a>
                                 </div>
@@ -117,4 +139,4 @@
     ]) !!};
 </script>
 
-<script src="{{ asset("admin/light-rtl/js/general.js") }}"></script>
+<script src="{{ asset('admin/light-rtl/js/general.js') }}"></script>

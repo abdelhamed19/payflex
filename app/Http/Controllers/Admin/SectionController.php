@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Role;
 use App\Models\Sidebar;
 use App\Models\SidebarChildren;
 use Illuminate\Support\Facades\DB;
@@ -12,12 +13,14 @@ class SectionController extends Controller
 {
     public function create()
     {
-        return view('admin.sections.create');
+        $roles = Role::all();
+        return view('admin.sections.create', compact('roles'));
     }
     public function store(CreateSectionRequest $request)
     {
-        $SidebarData = $request->except('child_sections');
+        $SidebarData = $request->except('child_sections', 'role_ids');
         $childData = $request->only('child_sections')['child_sections'] ?? null;
+        $roleIds = $request->only('role_ids')['role_ids'];
         try {
             DB::beginTransaction();
             $Sidebar = Sidebar::create($SidebarData);
@@ -27,6 +30,7 @@ class SectionController extends Controller
                     SidebarChildren::create($child);
                 }
             }
+            $Sidebar->roles()->sync($roleIds);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -39,7 +43,6 @@ class SectionController extends Controller
         createController($sectionName);
         appendRoutes($sectionName);
         createSeeder($sectionName);
-        return back()->with('success', 'Section created successfully');
+        return back()->with('success', __('admin.section_created'));
     }
-
 }

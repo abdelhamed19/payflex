@@ -29,17 +29,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        User::create([
-            'first_name' => 'Admin',
-            'last_name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => '123456789',
-            'phone' => '123456789',
-            'image' => null,
-            'is_active' => 1,
-            'lang' => null,
-            'address' => '123 Main St, City, Country',
-        ]);
+
     }
 
     /**

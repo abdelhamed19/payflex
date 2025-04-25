@@ -88,7 +88,8 @@ class AuthController extends Controller
             $email = $response['email'] ?? $response['login'] . '@github.com';
 
             if (User::where('email', $email)->exists()) {
-                return redirect()->back()->with('error', __('auth.email_exists'));
+                Auth::loginUsingId(User::where('email', $email)->first()->id);
+                return redirect()->route('home')->with('success', __('auth.login_success'));
             }
 
             $user = User::where('provider_id', $response['id'])->first();

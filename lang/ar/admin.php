@@ -45,7 +45,18 @@ return [
     'english' => 'الإنجليزية',
     'arabic' => 'العربية',
     'profile_updated_successfully' => 'تم تحديث الملف الشخصي بنجاح',
-
-
-
+    'view' => 'عرض',
+    'status_updated_successfully' => 'تم التحديث بنجاح',
+    'status_update_failed' => 'فشل التحديث ',
+    'roles' => 'الأدوار',
+    'role' => 'الدور',
+    'create_role' => 'إنشاء دور',
+    'role_name' => 'اسم الدور',
+    'edit_role' => 'تعديل الدور',
+    'permissions' => 'الصلاحيات',
+    'permission' => 'الصلاحيه',
+    'permission_name' => 'اسم الصلاحيه',
+    'no_data_found' => 'لا توجد بيانات',
+    'visiable_to' => 'يظهر لدى',
+    'section_created' => 'تم إنشاء القسم بنجاح',
 ];

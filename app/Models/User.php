@@ -30,6 +30,7 @@ class User extends Authenticatable
         'is_active',
         'lang',
         'address',
+        'role_id',
     ];
 
     /**
@@ -53,5 +54,21 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+    public function getImageAttribute()
+    {
+        if ($this->attributes['image'] != null) {
+            return asset( $this->attributes['image']);
+        } else {
+            return asset('storage/admin/default.jpg');
+        }
+    }
+    public function setImageAttribute($value)
+    {
+        if ($value != null) {
+            $this->attributes['image'] = 'storage/admin/'.$value;
+        } else {
+            $this->attributes['image'] = 'storage/admin/default.jpg';
+        }
     }
 }

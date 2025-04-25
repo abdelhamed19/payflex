@@ -24,6 +24,7 @@ class CreateSectionRequest extends BaseRequest
             'is_active' => 'required|boolean',
             'child_sections.*.name.*' => 'required|string|max:255',
             'child_sections.*.icon' => 'nullable|string|max:255',
+            'role_ids.*' => ['required','integer'],
             'child_sections.*.route' => [
                 'nullable',
                 'string',

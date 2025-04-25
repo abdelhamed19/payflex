@@ -34,6 +34,7 @@ class UpdateProfile extends BaseRequest
             ->symbols()],
             'phone' => 'nullable|string|max:15',
             'address' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
