@@ -32,16 +32,18 @@ A reusable and extensible Laravel starter kit designed for rapid development of 
 
 ## 📂 Folder Structure Highlights
 app/
-├── Controllers/ # Handling logic
-├── Helpers/ # Global helper functions
-├── Modules/ # Dynamically generated modules
-├── Interfaces/ # Dynamically generated modules
-├── Services/ # Custom service classes (e.g., PaymentService, Third party)
+├── Controllers/ # Handles HTTP request logic
+├── Helpers/ # Global helper functions accessible throughout the app
+├── Modules/ # Custom-built modules generated dynamically via dashboard
+├── Interfaces/ # Interface contracts for services and repositories
+├── Services/ # Core service classes (e.g., PaymentService, third-party APIs)
+
 resources/
-├── views/ # Blade views with dark mode support
+├── views/ # Blade templates (includes support for RTL/LTR and dark mode)
+
 routes/
-├── web.php # Web routes
-├── api.php # API routes
+├── web.php # Web interface routes
+├── api.php # RESTful API routes
 
 ---
 
@@ -56,6 +58,7 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 ## 🔐 Social Login Setup
+Add your credentials to `.env`:
 ```bash
 FACEBOOK_CLIENT_ID=***************
 FACEBOOK_CLIENT_SECRET=******************************
@@ -68,7 +71,11 @@ GOOGLE_REDIRECT_URI="***************"
 GITHUB_CLIENT_ID=***************
 GITHUB_CLIENT_SECRET=******************************
 GITHUB_REDIRECT_URI="***************"
+```
 
+💳 Payment Gateway Setup
+Add your credentials to `.env`:
+```bash
 PAYMOB_API_KEY=*********************************************
 PAYMOB_API_SECRET=***************
 PAMOB_PUBLIC_KEY=***************
