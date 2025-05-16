@@ -31,19 +31,22 @@ A reusable and extensible Laravel starter kit designed for rapid development of 
 ---
 
 ## 📂 Folder Structure Highlights
+
+```bash
 app/
-├── Controllers/ # Handles HTTP request logic
-├── Helpers/ # Global helper functions accessible throughout the app
-├── Modules/ # Custom-built modules generated dynamically via dashboard
-├── Interfaces/ # Interface contracts for services and repositories
-├── Services/ # Core service classes (e.g., PaymentService, third-party APIs)
+├── Controllers/     # Handles HTTP request logic
+├── Helpers/         # Global helper functions accessible throughout the app
+├── Modules/         # Custom-built modules generated dynamically via dashboard
+├── Interfaces/      # Interface contracts for services and repositories
+├── Services/        # Core service classes (e.g., PaymentService, third-party APIs)
 
 resources/
-├── views/ # Blade templates (includes support for RTL/LTR and dark mode)
+├── views/           # Blade templates (includes support for RTL/LTR and dark mode)
 
 routes/
-├── web.php # Web interface routes
-├── api.php # RESTful API routes
+├── web.php          # Web interface routes
+├── api.php          # RESTful API routes
+```
 
 ---
 
