@@ -59,4 +59,6 @@ return [
     'inactive_role' => 'Role is inactive, please contact the administrator',
     'inactive_account' => 'Your account is inactive, please contact the administrator',
     'email_not_found' => 'Email not found in the system',
+    'register_success' => 'Registration successful, please check your email to activate your account',
+    'register_failed' => 'Registration failed, please try again',
 ];

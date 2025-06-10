@@ -45,8 +45,11 @@ class BaseModel extends Model
     public function setImageAttribute($value)
     {
         if ($value != null) {
-            if (isset($this->attributes['image'])) {
+            if (isset($this->attributes['image']) && $this->attributes['image'] != 'admin/default.jpg') {
                 $this->deleteFile($this->attributes['image']);
+                $this->attributes['image'] = $value;
+            }
+            else {
                 $this->attributes['image'] = $value;
             }
         } else {

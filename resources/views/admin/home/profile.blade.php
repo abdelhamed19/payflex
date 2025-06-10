@@ -8,7 +8,7 @@
                 <div class="col-md-12">
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <form action="{{ route('update.profile') }}" method="POST" class="needs-validation" novalidate>
+                            <form action="{{ route('update.profile') }}" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12 text-center mb-4 position-relative">
@@ -22,8 +22,9 @@
 
                                         <!-- عرض الصورة -->
                                         <img id="profileImagePreview"
-                                            src="{{ asset($user->image ?? 'admin/light/assets/avatars/face-1.jpg') }}"
-                                            class="rounded-circle img-fluid custom-img" alt="Profile Image">
+                                            src="{{ $user->image }}"
+                                            class="rounded-circle custom-img" alt="Profile Image"
+                                            width="150" height="150">
 
                                         <!-- زر تحميل صورة جديدة -->
                                         <input type="file" name="image" id="profileImageInput"
@@ -92,6 +93,7 @@
                                                         <label for="icon">{{ __('auth.phone') }}</label>
                                                         <input type="text" class="form-control" name="phone"
                                                             placeholder="123456789" value="{{ $user->phone }}">
+                                                        <x-validation-message field='phone' />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -99,6 +101,7 @@
                                                         <label for="icon">{{ __('auth.address') }}</label>
                                                         <input type="text" class="form-control" name="address"
                                                             placeholder="123 Main St, City, Country" value="{{ $user->address }}">
+                                                        <x-validation-message field='address' />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">

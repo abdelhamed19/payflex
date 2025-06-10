@@ -37,7 +37,7 @@ class AuthController extends Controller
             $user = User::create($data);
             auth()->login($user);
             DB::commit();
-            return redirect()->route('index')->with('success', __('auth.registration_success'));
+            return redirect()->route('home')->with('success', __('auth.registration_success'));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', __('auth.registration_failed'));
@@ -118,9 +118,5 @@ class AuthController extends Controller
         $file = $request->file('file');
         $res = $this->uploadFile($file, 'images');
         return $res;
-    }
-    public function delete()
-    {
-      return $this->deleteFile('public/images/1743608169_photo_2025-01-22_21-08-37.jpg');
     }
 }

@@ -19,7 +19,7 @@ class LoginMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $email = $request->email;
+        $email = $request->email ?? $request->user()?->email ;
         $user = User::whereEmail($email)->first();
         if (!$user) {
             if ($request->expectsJson()) {

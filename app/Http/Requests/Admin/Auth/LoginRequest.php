@@ -23,8 +23,8 @@ class LoginRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required|email|max:255|exists:users,email',
+            'password' => 'required',
         ];
     }
 }

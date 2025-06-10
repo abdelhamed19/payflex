@@ -19,7 +19,10 @@ class AdminController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $data = $request->validated();
-        $user->update($data);
+        $payload = array_filter($data, function ($value) {
+            return $value !== null;
+        });
+        $user->update($payload);
         return redirect()->back()->with('success', __('admin.profile_updated_successfully'));
     }
 }

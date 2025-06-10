@@ -5,15 +5,13 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\UploadTrait;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use UploadTrait;
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, UploadTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -52,22 +50,22 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
-    public function setPasswordAttribute($value)
+    protected static function booted()
     {
-        $this->attributes['password'] = Hash::make($value);
+        static::creating(function ($user) {
+            $user->lang = app()->getLocale();
+            $user->role_id = 4;
+        });
     }
     public function getFullNameAttribute()
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
-    public function createUserToken()
-    {
-        return $this->createToken('auth_token')->plainTextToken;
-    }
     public function getImageAttribute()
     {
-        if ($this->attributes['image'] != null) {
+        if (isset($this->attributes['image']) && $this->attributes['image'] != null){
             return $this->getFileUrl($this->attributes['image']);
         } else {
             return $this->getFileUrl('admin/default.jpg');
@@ -75,16 +73,15 @@ class User extends Authenticatable
     }
     public function setImageAttribute($value)
     {
-        if ($value != null) {
+        if (isset($value) && $value != null) {
             if (isset($this->attributes['image']) && $this->attributes['image'] != 'admin/default.jpg') {
                 $this->deleteFile($this->attributes['image']);
-                $this->attributes['image'] = $value;
-            }
-            else {
-                $this->attributes['image'] = $value;
+              return  $this->attributes['image'] = $value;
+            } else {
+               return $this->attributes['image'] = $this->uploadFile($value, 'users');
             }
         } else {
-            $this->attributes['image'] = 'admin/default.jpg';
+           return $this->attributes['image'] = 'admin/default.jpg';
         }
     }
 }

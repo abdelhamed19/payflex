@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'is_active' => $this->is_active,
             'role' => Role::find($this->role_id)->name,
-            'token' => $this->createUserToken(),
+            'token' => $this->createToken('auth_token')->plainTextToken,
             'image' => $this->image
         ];
     }

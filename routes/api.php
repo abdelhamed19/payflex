@@ -16,9 +16,10 @@ use App\Http\Controllers\Api\AuthController;
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('upload-image',[AuthController::class, 'uploadImage']);
+
 });
 
 Route::post('/sign-in', [AuthController::class, 'signIn'])
     ->name('api.login')
     ->middleware(['guest','role-login']);
+Route::post('/register', [AuthController::class, 'signUp']);
