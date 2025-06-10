@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\Payments\PaymentController;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('upload-image',[AuthController::class, 'uploadImage']);
 });
 
-Route::post('/test/payment',[PaymentController::class,'createPayment']);
-Route::get('test',function ()
-{
-    $users = User::all();
-    return response()->json($users);
-});
+Route::post('/sign-in', [AuthController::class, 'signIn'])
+    ->name('api.login')
+    ->middleware(['guest','role-login']);

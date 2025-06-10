@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\UploadTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use UploadTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -55,20 +57,34 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+    public function getFullNameAttribute()
+    {
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+    public function createUserToken()
+    {
+        return $this->createToken('auth_token')->plainTextToken;
+    }
     public function getImageAttribute()
     {
         if ($this->attributes['image'] != null) {
-            return asset( $this->attributes['image']);
+            return $this->getFileUrl($this->attributes['image']);
         } else {
-            return asset('storage/admin/default.jpg');
+            return $this->getFileUrl('admin/default.jpg');
         }
     }
     public function setImageAttribute($value)
     {
         if ($value != null) {
-            $this->attributes['image'] = 'storage/admin/'.$value;
+            if (isset($this->attributes['image']) && $this->attributes['image'] != 'admin/default.jpg') {
+                $this->deleteFile($this->attributes['image']);
+                $this->attributes['image'] = $value;
+            }
+            else {
+                $this->attributes['image'] = $value;
+            }
         } else {
-            $this->attributes['image'] = 'storage/admin/default.jpg';
+            $this->attributes['image'] = 'admin/default.jpg';
         }
     }
 }

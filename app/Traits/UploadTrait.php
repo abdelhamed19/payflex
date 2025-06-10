@@ -13,10 +13,10 @@ trait UploadTrait
      * @param string $directory
      * @return string
      */
-    public function uploadFile($file, $directory)
+    public function uploadFile($file, $directory = 'images')
     {
         $fileName = time() . '_' . $file->getClientOriginalName();
-        return $file->storeAs('public/' . $directory, $fileName);
+        return $file->storeAs($directory, $fileName);
     }
 
     /**
@@ -27,10 +27,13 @@ trait UploadTrait
      */
     public function deleteFile($filePath)
     {
-        $filePath = str_replace('\\', '/', $filePath); // التوافق مع جميع الأنظمة
         if (Storage::exists($filePath)) {
             return Storage::delete($filePath);
         }
         return false;
+    }
+    public function getFileUrl($filePath)
+    {
+        return Storage::url($filePath);
     }
 }

@@ -26,12 +26,12 @@ trait ResponseTrait
             'data' => $data,
         ], $this->codes['success']);
     }
-    public function failResponse($message)
+    public function failResponse($message, $code = null)
     {
         return response()->json([
             'key' => __('admin.failed'),
             'message' => $message,
-        ], $this->codes['internal_server_error']);
+        ], $code ?? $this->codes['internal_server_error']);
     }
     public function unauthorizedResponse($message)
     {

@@ -17,6 +17,7 @@ class ResponseLocalMiddleware
     {
         // جلب قيمة اللغة من الهيدر، وإذا لم تكن موجودة يتم تعيين "ar" كافتراضي
         $lang = $request->header('Lang') ?? 'ar';
+        $request->headers->set('Accept', 'application/json');
         // تعيين اللغة للتطبيق
         app()->setLocale($lang);
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Models\Country;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\Admin\SectionController;
 */
 
 Route::get('change-lang/{lang}', [SettingController::class, 'changeLanguage'])->name('change.language');
-Route::prefix('admin')->middleware(['auth', 'check-role'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'check-role','role-login'])->group(function () {
 
     Route::get('/home', function () {
         return view('admin.home.index');
@@ -55,3 +56,17 @@ Route::post('reset-password', [AuthController::class, 'forgetPassword'])->name('
 
 Route::get('{provider}/redirect', [AuthController::class, 'redirectToProvider'])->name('provider.redirect');
 Route::get('{provider}/callback', [AuthController::class, 'handleProviderCallback'])->name('provider.callback');
+
+Route::get('chart', function () {
+    $countries = Country::whereHas('cities')
+    ->withCount('cities')->get();
+    $data = $countries->map(function($country){
+        return [
+            'country' => json_decode($country->name,true)['ar'],
+            'city_count' => $country->cities_count
+        ];
+    });
+   return response()->json($data);
+})->name('chart');
+Route::view('/chart/view', 'chart')->name('chart.view');
+

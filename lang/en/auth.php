@@ -56,4 +56,7 @@ return [
     'facebook' => 'Facebook',
     'login_with_provider' => 'Login with',
     'email_exists' => 'Email already exists',
+    'inactive_role' => 'Role is inactive, please contact the administrator',
+    'inactive_account' => 'Your account is inactive, please contact the administrator',
+    'email_not_found' => 'Email not found in the system',
 ];

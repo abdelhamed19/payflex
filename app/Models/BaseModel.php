@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\UploadTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
-    use HasFactory;
+    use HasFactory, UploadTrait;
     public function getTranslation($attribute, $locale = null)
     {
         if (is_null(json_decode($attribute, true))) {
@@ -33,28 +34,23 @@ class BaseModel extends Model
             return $value;
         }
     }
-    public function getImageAttribute($value)
+    public function getImageAttribute()
     {
         if ($this->attributes['image'] != null) {
-            return asset('storage/' . $this->attributes['image']);
+            return $this->getFileUrl($this->attributes['image']);
         } else {
-            return asset('/storage/admin/default.jpg');
+            return $this->getFileUrl('admin/default.jpg');
         }
     }
-    // public function getImagePathAttribute($value)
-    // {
-    //     if ($this->attributes['image'] != null) {
-    //         return 'storage/' . $this->attributes['image'];
-    //     } else {
-    //         return 'storage/admin/default.jpg';
-    //     }
-    // }
-    // public function setImageAttribute($value)
-    // {
-    //     if ($this->attributes['image'] != null && $this->attributes['image']) {
-    //         $this->attributes['image'] = $value;
-    //     } else {
-    //         $this->attributes['image'] = $value->store('images', 'public');
-    //     }
-    // }
+    public function setImageAttribute($value)
+    {
+        if ($value != null) {
+            if (isset($this->attributes['image'])) {
+                $this->deleteFile($this->attributes['image']);
+                $this->attributes['image'] = $value;
+            }
+        } else {
+            $this->attributes['image'] = 'admin/default.jpg';
+        }
+    }
 }

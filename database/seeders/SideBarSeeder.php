@@ -75,6 +75,14 @@ class SideBarSeeder extends Seeder
             'icon' => 'fe fe-lock fe-16',
             'route' => '/admin/roles',
         ]);
+                DB::table('sidebars')->insert([
+            'name' => json_encode([
+                'ar' => 'شارتات',
+                'en' => 'charts'
+            ], JSON_UNESCAPED_UNICODE),
+            'icon' => 'fe fe-lock fe-16',
+            'route' => '/admin/charts',
+        ]);
         DB::table('sidebar_role')->insert([
             'sidebar_id' => 2, // sections
             'role_id' => 1,

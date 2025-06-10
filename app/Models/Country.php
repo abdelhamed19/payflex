@@ -22,5 +22,8 @@ class Country extends BaseModel
     {
         return json_decode($this->attributes['timezones'], true);
     }
-
+    public function cities()
+    {
+        return $this->hasMany(City::class, 'country_id', 'id');
+    }
 }

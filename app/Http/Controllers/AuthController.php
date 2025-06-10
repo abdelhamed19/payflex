@@ -6,10 +6,8 @@ use App\Models\User;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Traits\ResponseTrait;
 use App\Mail\ResetPasswordMail;
 use App\Services\Thirdparty\OAuthService;
-use App\Exceptions\DuplicatedEmailException;
 use Illuminate\Support\Facades\{DB, Auth, Mail};
 use App\Http\Requests\Admin\Auth\{ForgetRequest, LoginRequest, RegisterRequest};
 
@@ -63,6 +61,7 @@ class AuthController extends Controller
             Mail::to($user->email)->send(new ResetPasswordMail($user, $newPass));
             return redirect()->back()->with('success', __('auth.password_reset_success'));
         }
+        return redirect()->back()->withErrors(['email' => __('auth.email_not_found')]);
     }
     public function logout()
     {

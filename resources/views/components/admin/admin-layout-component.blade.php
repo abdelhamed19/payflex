@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,7 +31,7 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ asset("admin/$path/css/app-light.css") }}" id="lightTheme">
     <link rel="stylesheet" href="{{ asset("admin/$path/css/app-dark.css") }}" id="darkTheme" disabled>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="vertical light {{ $mode }}">

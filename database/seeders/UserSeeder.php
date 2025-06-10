@@ -61,6 +61,5 @@ class UserSeeder extends Seeder
             'address' => '123 Main St, City, Country',
             'role_id' => 4,
         ]);
-
     }
 }

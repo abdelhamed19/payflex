@@ -1,4 +1,4 @@
 <?php
 return [
-    'route_not_found' => 'The requested page does not exist',
+    'route_not_found' => 'The requested url does not exist',
 ];
