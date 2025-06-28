@@ -62,5 +62,10 @@ return [
     'no_data_found' => 'No Data Found',
     'visiable_to' => 'Visible To',
     'section_created' => 'Section created successfully',
-
+    'invalid_model' => 'Invalid model name provided',
+    'record_not_found' => 'Record not found',
+    'model_does_not_have_is_active_field' => 'Model does not have is_active field',
+    'invalid_input' => 'Invalid input',
+    'items_deleted_successfully' => 'Items deleted successfully',
+    'no_items_deleted' => 'No items were deleted',
 ];

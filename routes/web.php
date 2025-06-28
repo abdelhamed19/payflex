@@ -20,7 +20,7 @@ use App\Models\Country;
 */
 
 Route::get('change-lang/{lang}', [SettingController::class, 'changeLanguage'])->name('change.language');
-Route::prefix('admin')->middleware(['auth', 'check-role','role-login'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'check-role', 'role-login'])->group(function () {
 
     Route::get('/home', function () {
         return view('admin.home.index');
@@ -44,6 +44,9 @@ Route::prefix('admin')->middleware(['auth', 'check-role','role-login'])->group(f
 
     Route::get('/toggle-status/{model}/{id}/{action}', [SettingController::class, 'toggleStatus'])
         ->name('admin.toggle-status');
+
+    Route::get('/search', [SettingController::class, 'search'])->name('admin.search');
+    Route::post('/delete/items', [SettingController::class, 'deleteItems'])->name('admin.delete.items');
 });
 
 Route::view('/', 'auth.login')->name('login');
@@ -56,17 +59,3 @@ Route::post('reset-password', [AuthController::class, 'forgetPassword'])->name('
 
 Route::get('{provider}/redirect', [AuthController::class, 'redirectToProvider'])->name('provider.redirect');
 Route::get('{provider}/callback', [AuthController::class, 'handleProviderCallback'])->name('provider.callback');
-
-Route::get('chart', function () {
-    $countries = Country::whereHas('cities')
-    ->withCount('cities')->get();
-    $data = $countries->map(function($country){
-        return [
-            'country' => json_decode($country->name,true)['ar'],
-            'city_count' => $country->cities_count
-        ];
-    });
-   return response()->json($data);
-})->name('chart');
-Route::view('/chart/view', 'chart')->name('chart.view');
-

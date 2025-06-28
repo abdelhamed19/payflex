@@ -59,4 +59,10 @@ return [
     'no_data_found' => 'لا توجد بيانات',
     'visiable_to' => 'يظهر لدى',
     'section_created' => 'تم إنشاء القسم بنجاح',
+    'invalid_model' => 'نموذج غير صالح',
+    'record_not_found' => 'السجل غير موجود',
+    'model_does_not_have_is_active_field' => 'النموذج لا يحتوي على حقل is_active',
+    'invalid_input' => 'إدخال غير صالح',
+    'items_deleted_successfully' => 'تم حذف العناصر بنجاح',
+    'no_items_deleted' => 'لم يتم حذف أي عناصر',
 ];

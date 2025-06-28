@@ -21,12 +21,14 @@
                             </div>
                             <div class="col ml-auto">
                                 <div class="dropdown float-right">
-                                    <a href="" role="button" class="btn btn-primary float-right ml-3" >{{ __('admin.create') }}</a>
+                                    <a href="" role="button"
+                                        class="btn btn-primary float-right ml-3">{{ __('admin.create') }}</a>
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Action </button>
                                     <div class="dropdown-menu" aria-labelledby="actionMenuButton">
                                         <a class="dropdown-item" href="#">Export</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                                        <a class="dropdown-item delete-selected" data-model="Role" href="#">Delete</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -52,8 +54,10 @@
                                     <tr>
                                         <td>
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="4574">
-                                                <label class="custom-control-label" for="4574"></label>
+                                                <input type="checkbox" class="custom-control-input row-checkbox"
+                                                    data-id="{{ $role->id }}" id="checkbox-{{ $role->id }}">
+                                                <label class="custom-control-label"
+                                                    for="checkbox-{{ $role->id }}"></label>
                                             </div>
                                         </td>
                                         <td>{{ $role->id }}</td>
@@ -62,16 +66,18 @@
                                             <x-admin.toggle-switch :id="$role->id" :isActive="$role->is_active" model="Role" />
                                         </td>
                                         <td>
-                                            <a href="" role="button" class="btn mb-2 btn-secondary btn-sm">{{ __('admin.edit') }}</a>
-                                            <a href="" role="button" class="btn mb-2 btn-danger btn-sm">{{ __('admin.delete') }}</a>
-                                            <a href="" role="button" class="btn mb-2 btn-warning btn-sm">{{ __('admin.view') }}</a>
+                                            <a href="" class="btn btn-sm btn-secondary">{{ __('admin.edit') }}</a>
+                                            <a href="" class="btn btn-sm btn-danger">{{ __('admin.delete') }}</a>
+                                            <a href="" class="btn btn-sm btn-warning">{{ __('admin.view') }}</a>
                                         </td>
                                     </tr>
-                                    @empty
+                                @empty
                                     <tr>
-                                        <td colspan="5" class="text-center text-muted">{{ __('admin.no_data_found') }}</td>
+                                        <td colspan="5" class="text-center text-muted">{{ __('admin.no_data_found') }}
+                                        </td>
                                     </tr>
                                 @endforelse
+
                             </tbody>
                         </table>
                         <nav aria-label="Table Paging" class="mb-0 text-muted">

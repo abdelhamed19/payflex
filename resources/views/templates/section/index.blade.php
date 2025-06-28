@@ -21,17 +21,24 @@
                             </div>
                             <div class="col ml-auto">
                                 <div class="dropdown float-right">
-                                    <a href="" role="button" class="btn btn-primary float-right ml-3">{{__('admin.create')}}</a>
+                                    <a href="" role="button"
+                                        class="btn btn-primary float-right ml-3">{{ __('admin.create') }}</a>
+
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Action </button>
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action
+                                    </button>
+
                                     <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-                                        <a class="dropdown-item" href="#">Export</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                                        <a class="dropdown-item export-selected" href="javascript:void(0)">Export</a>
+                                        <a class="dropdown-item delete-selected" href="javascript:void(0)"
+                                            data-model="Country">Delete</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- table -->
+                        <div class="table-wrapper">
                         <table class="table table-bordered">
                             <thead>
                                 <tr role="row">
@@ -52,9 +59,13 @@
                                     <tr>
                                         <td>
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="4574">
-                                                <label class="custom-control-label" for="4574"></label>
+                                                <input type="checkbox" class="custom-control-input row-checkbox"
+                                                 data-id="{{ $data->id }}"
+                                                 id="checkbox-{{ $data->id }}">
+                                                <label class="custom-control-label"
+                                                        for="checkbox-{{ $data->id }}"></label>
                                             </div>
+
                                         </td>
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->getTranslation($data->name) }}</td>
@@ -74,6 +85,7 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        </div>
                         <nav aria-label="Table Paging" class="mb-0 text-muted">
                             <ul class="pagination justify-content-end mb-0">
                                 {{ $model->links() }}

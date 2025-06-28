@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Region;
 use App\Models\Country;
+use Illuminate\Support\Facades\App;
 
 class SettingController extends Controller
 {
@@ -35,18 +36,18 @@ class SettingController extends Controller
             $modelClass = "App\\Models\\" . ucfirst($model);
 
             if (!class_exists($modelClass)) {
-                return response()->json(['success' => false, 'message' => 'Invalid model name!'], 400);
+                return response()->json(['success' => false, 'message' => __('admin.invalid_model')], 400);
             }
 
             $record = $modelClass::find($id);
 
             if (!$record) {
-                return response()->json(['success' => false, 'message' => 'Record not found!'], 404);
+                return response()->json(['success' => false, 'message' => __('admin.record_not_found')], 404);
             }
 
             // التحقق من وجود الحقل is_active في الموديل
             if (!array_key_exists('is_active', $record->getAttributes())) {
-                return response()->json(['success' => false, 'message' => 'Model does not have is_active field!'], 400);
+                return response()->json(['success' => false, 'message' => __('admin.model_does_not_have_is_active_field')], 400);
             }
 
             // تحديث الحالة
@@ -65,5 +66,46 @@ class SettingController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+    public function deleteItems()
+    {
+        $ids = request()->input('ids');
+        $model = request()->input('model');
+
+        if (empty($ids) || empty($model)) {
+            return response()->json(['success' => false, 'message' => __('admin.invalid_input')], 400);
+        }
+
+        $modelClass = "App\\Models\\" . ucfirst($model);
+
+        if (!class_exists($modelClass)) {
+            return response()->json(['success' => false, 'message' => __('admin.invalid_model')], 400);
+        }
+
+        $deletedCount = $modelClass::destroy($ids);
+
+        if ($deletedCount > 0) {
+            return response()->json(['success' => true, 'message' => __('admin.items_deleted_successfully')]);
+        } else {
+            return response()->json(['success' => false, 'message' => __('admin.no_items_deleted')], 404);
+        }
+    }
+    public function search()
+    {
+        $search = request()->input('search');
+        $model = request()->input('model');
+        $fromDate = request()->input('from_date');
+        $toDate = request()->input('to_date');
+        $file = request()->input('file_directory');
+        $value = request()->input('value');
+        if (class_exists("App\\Models\\" . ucfirst($model))) {
+            $modelClass = "App\\Models\\" . ucfirst($model);
+        } else {
+            return response()->json(['success' => false, 'message' => __('admin.invalid_model')], 400);
+        }
+        $queryBuilder = $modelClass::search($search);
+        return view($file, [
+            $value => $queryBuilder
+        ]);
     }
 }
