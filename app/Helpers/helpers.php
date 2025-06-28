@@ -52,11 +52,18 @@ function appendRoutes($sectionName)
     $routeFilePath = base_path('routes/web.php');
     $controllerName = Str::studly(Str::singular($sectionName)) . 'Controller';
     $controllerNamespace = "App\\Http\\Controllers\\Admin\\{$controllerName}";
+    $routeDefinition = "Route::get('{$sectionName}/index', [{$controllerName}::class, 'index'])->name('{$sectionName}.index');";
 
     $routeFileContent = File::get($routeFilePath);
 
+    // أضف use إذا مش موجود
     if (!str_contains($routeFileContent, "use {$controllerNamespace};")) {
         $routeFileContent = preg_replace('/<\?php\s*/', "<?php\n\nuse {$controllerNamespace};\n", $routeFileContent, 1);
+    }
+
+    // لو الراوت موجود خلاص اخرج
+    if (str_contains($routeFileContent, $routeDefinition)) {
+        return;
     }
 
     $routes = <<<EOD
@@ -71,60 +78,76 @@ function appendRoutes($sectionName)
 
 EOD;
 
-    $pattern = '/Route::prefix\(\'admin\'\)->middleware\(\[\'auth\'\,\'check-role\'\]\)->group\(function\s*\(\)\s*\{/';
-    if (preg_match($pattern, $routeFileContent, $matches, PREG_OFFSET_CAPTURE)) {
-        $closingBracketPos = strrpos($routeFileContent, '});');
+    // match جروب الادمن كامل
+    $pattern = '/Route::prefix\([\'"]admin[\'"]\)->middleware\([^\)]*\)->group\(function\s*\(\)\s*\{(.*?)\n\}\);/s';
 
-        if ($closingBracketPos !== false) {
-            $routeFileContent = substr_replace($routeFileContent, $routes, $closingBracketPos, 0);
+    if (preg_match($pattern, $routeFileContent, $matches)) {
+        $originalGroup = $matches[0];
+        $groupBody = $matches[1];
 
-            File::put($routeFilePath, $routeFileContent);
-        }
+        // أضف الراوتات قبل قوس النهاية
+        $newGroup = str_replace($groupBody, $groupBody . $routes, $originalGroup);
+        $routeFileContent = str_replace($originalGroup, $newGroup, $routeFileContent);
+
+        File::put($routeFilePath, $routeFileContent);
+        Artisan::call('optimize');
     }
-    Artisan::call('optimize');
 }
-function createRequestFiles($sectionName)
+
+function createRequestFolderWithFiles($sectionName)
 {
-    $sectionName = Str::studly(Str::singular($sectionName));
-    $requests = [
-        'storeRequest' => "Create{$sectionName}Request",
-        'updateRequest' => "Update{$sectionName}Request"
-    ];
-    foreach ($requests as $requestName) {
-        $requestPath = app_path("Http/Requests/Admin/{$sectionName}/{$requestName}.php");
+    $folderName = Str::studly(Str::singular($sectionName));
+    $folderPath = app_path("Http/Requests/Admin/{$folderName}");
 
-        if (!file_exists($requestPath)) {
-            Artisan::call("make:request Admin/{$sectionName}/{$requestName}");
+    if (!File::exists($folderPath)) {
+        File::makeDirectory($folderPath, 0755, true);
+    }
+
+    $requests = [
+        "Create{$folderName}Request",
+        "Update{$folderName}Request",
+    ];
+
+    foreach ($requests as $request) {
+        $filePath = "{$folderPath}/{$request}.php";
+        if (!file_exists($filePath)) {
+            Artisan::call("make:request Admin/{$folderName}/{$request}");
         }
     }
 }
+
 function createController($sectionName)
 {
     $modelName = Str::studly(Str::singular($sectionName));
-    $modelPath = '\App\Models\\' . Str::studly(Str::singular($sectionName));
-    $controllerName = Str::studly(Str::singular($sectionName)) . 'Controller';
+    $modelPath = "App\\Models\\{$modelName}";
+    $controllerName = "{$modelName}Controller";
     $controllerPath = app_path("Http/Controllers/Admin/{$controllerName}.php");
 
     if (!file_exists($controllerPath)) {
         Artisan::call("make:controller Admin/{$controllerName}");
     }
 
-
     if (file_exists($controllerPath)) {
+        $requestNamespace = "App\\Http\\Requests\\Admin\\{$modelName}";
+        $createRequest = "Create{$modelName}Request";
+        $updateRequest = "Update{$modelName}Request";
+
         $controllerTemplate = <<<PHP
 <?php
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use {$modelPath};
+use {$requestNamespace}\\{$createRequest};
+use {$requestNamespace}\\{$updateRequest};
 
 class {$controllerName} extends Controller
 {
     public function index()
     {
         return view('admin.{$sectionName}.index', [
-            'model' => {$modelPath}::paginate(10),
+            'model' => {$modelName}::paginate(10),
             'modelName' => '{$modelName}',
         ]);
     }
@@ -134,7 +157,7 @@ class {$controllerName} extends Controller
         return view('admin.{$sectionName}.create');
     }
 
-    public function store(Request \$request)
+    public function store({$createRequest} \$request)
     {
         // تخزين البيانات
     }
@@ -144,7 +167,7 @@ class {$controllerName} extends Controller
         return view('admin.{$sectionName}.edit', compact('id'));
     }
 
-    public function update(Request \$request, \$id)
+    public function update({$updateRequest} \$request, \$id)
     {
         // تحديث البيانات
     }
@@ -158,6 +181,7 @@ PHP;
         file_put_contents($controllerPath, $controllerTemplate);
     }
 }
+
 function createSeeder($sectionName)
 {
     $seederName = Str::studly(Str::singular($sectionName)) . 'Seeder';
