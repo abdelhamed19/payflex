@@ -12,6 +12,7 @@ class SideBarSeeder extends Seeder
      */
     public function run(): void
     {
+        // id = 1
         DB::table('sidebars')->insert([
             'name' => json_encode([
                 'ar' => 'الصفحة الرئيسية',
@@ -21,6 +22,7 @@ class SideBarSeeder extends Seeder
             'route' => '/admin/home',
             'route_name' => 'home',
         ]);
+        // id = 2
         DB::table('sidebars')->insert([
             'name' => json_encode([
                 'ar' => 'السكاشن',
@@ -30,43 +32,7 @@ class SideBarSeeder extends Seeder
             'route' => '/admin/sections/create',
             'route_name' => 'sections.create',
         ]);
-        DB::table('sidebars')->insert([
-            'name' => json_encode([
-                'ar' => 'جغرافيا',
-                'en' => 'Geography'
-            ], JSON_UNESCAPED_UNICODE),
-            'icon' => 'fe fe-globe fe-16',
-        ]);
-        DB::table('sidebar_childrens')->insert([
-            'sidebar_id' => 3,
-            'name' => json_encode([
-                'ar' => 'الدول',
-                'en' => 'Countries'
-            ], JSON_UNESCAPED_UNICODE),
-            'icon' => 'fe fe-globe fe-16',
-            'route' => '/admin/countries',
-            'route_name' => 'countries.index',
-        ]);
-        DB::table('sidebar_childrens')->insert([
-            'sidebar_id' => 3,
-            'name' => json_encode([
-                'ar' => 'المناطق',
-                'en' => 'Regions'
-            ], JSON_UNESCAPED_UNICODE),
-            'icon' => 'fe fe-map-pin fe-16',
-            'route' => '/admin/regions',
-            'route_name' => 'regions.index',
-        ]);
-        DB::table('sidebar_childrens')->insert([
-            'sidebar_id' => 3,
-            'name' => json_encode([
-                'ar' => 'المدن',
-                'en' => 'Cities'
-            ], JSON_UNESCAPED_UNICODE),
-            'icon' => 'fe fe-map fe-16',
-            'route' => '/admin/cities',
-            'route_name' => 'cities.index',
-        ]);
+        // id = 4
         DB::table('sidebars')->insert([
             'name' => json_encode([
                 'ar' => 'الأدوار والصلاحيات',
@@ -75,7 +41,8 @@ class SideBarSeeder extends Seeder
             'icon' => 'fe fe-lock fe-16',
             'route' => '/admin/roles',
         ]);
-                DB::table('sidebars')->insert([
+        // id = 5
+        DB::table('sidebars')->insert([
             'name' => json_encode([
                 'ar' => 'شارتات',
                 'en' => 'charts'
@@ -83,9 +50,14 @@ class SideBarSeeder extends Seeder
             'icon' => 'fe fe-lock fe-16',
             'route' => '/admin/charts',
         ]);
+        
         DB::table('sidebar_role')->insert([
             'sidebar_id' => 2, // sections
             'role_id' => 1,
+        ]);
+        DB::table('sidebar_role')->insert([
+            'sidebar_id' => 2, // sections
+            'role_id' => 2,
         ]);
         DB::table('sidebar_role')->insert([
             'sidebar_id' => 1, // home

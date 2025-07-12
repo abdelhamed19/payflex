@@ -30,7 +30,8 @@
                             </div>
                         </div>
                         <!-- table -->
-                            <x-admin.table-component :model="$model" modelName="{{ $modelName }}" />
+                        <x-admin.table-component :model="$model" modelName="{{ $modelName }}" />
+
                     </div>
                 </div>
             </div> <!-- simple table -->

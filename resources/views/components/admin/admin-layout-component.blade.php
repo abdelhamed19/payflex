@@ -90,6 +90,7 @@
     <script src="{{ asset("admin/$path/js/jquery.dataTables.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/dataTables.bootstrap4.min.js") }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset("admin/general.js") }}"></script>
 
 
     <script>

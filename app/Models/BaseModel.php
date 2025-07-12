@@ -64,12 +64,7 @@ class BaseModel extends Model
                     $sub->where('name->ar', 'like', "%{$search['search']}%")
                         ->orWhere('name->en', 'like', "%{$search['search']}%")
                         ->orWhere('name', 'like', "%{$search['search']}%");
-                })
-                    ->orWhere(function ($sub) use ($search) {
-                        $sub->where('description->ar', 'like', "%{$search['search']}%")
-                            ->orWhere('description->en', 'like', "%{$search['search']}%")
-                            ->orWhere('description', 'like', "%{$search['search']}%");
-                    });
+                });
             });
         }
 

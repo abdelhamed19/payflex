@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Region;
 use App\Models\Country;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class SettingController extends Controller
 {
-    public function countries()
+    public function countries(Request $request)
     {
-        $countries = Country::paginate(10);
+        $countries = Country::search($request->query())->paginate(10);
         return view('admin.countries.index', compact('countries'));
     }
     public function regions()
@@ -90,6 +91,39 @@ class SettingController extends Controller
             return response()->json(['success' => false, 'message' => __('admin.no_items_deleted')], 404);
         }
     }
+    public function deleteResource()
+    {
+        $id = request()->query('id');
+        $model = request()->query('model');
+
+        if (empty($id) || empty($model)) {
+            return response()->json(['success' => false, 'message' => __('admin.invalid_input')], 400);
+        }
+
+        $modelClass = "App\\Models\\" . ucfirst($model);
+
+        if (!class_exists($modelClass)) {
+            return response()->json(['success' => false, 'message' => __('admin.invalid_model')], 400);
+        }
+
+        $record = $modelClass::find($id);
+
+        if (!$record) {
+            return response()->json(['success' => false, 'message' => __('admin.record_not_found')], 404);
+        }
+
+        try {
+            $record->delete();
+            return response()->json(['success' => true, 'message' => __('admin.success')]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => __('admin.failed'),
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function search()
     {
         $search = request()->input('search');

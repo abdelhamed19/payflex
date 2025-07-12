@@ -39,7 +39,7 @@ class SectionController extends Controller
         $sectionName = json_decode($Sidebar->name, true)['en'];
         createSectionViews($sectionName);
         createModelWithMigration($sectionName);
-        createRequestFiles($sectionName);
+        createRequestFolderWithFiles($sectionName);
         createController($sectionName);
         appendRoutes($sectionName);
         createSeeder($sectionName);

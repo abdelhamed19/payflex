@@ -8,41 +8,7 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="toolbar row mb-3">
-                            <div class="col-6">
-                                <form class="form-inline mb-3" method="GET" action="">
-                                    <input type="hidden" name="file_directory" value="admin.countries.index">
-                                    <input type="hidden" name="model" value="Country">
-                                    <input type="hidden" name="value" value="countries">
-
-
-                                    <div class="form-row align-items-center w-100">
-                                        {{-- البحث بالاسم أو المعرف --}}
-                                        <div class="col-auto mb-2">
-                                            <input type="text" class="form-control" name="search"
-                                                value="{{ request('search') }}" placeholder="ابحث بالاسم أو المعرّف">
-                                        </div>
-
-                                        {{-- من تاريخ --}}
-                                        <div class="col-auto mb-2">
-                                            <input type="date" class="form-control" name="from_date"
-                                                value="{{ request('from_date') }}">
-                                        </div>
-
-                                        {{-- إلى تاريخ --}}
-                                        <div class="col-auto mb-2">
-                                            <input type="date" class="form-control" name="to_date"
-                                                value="{{ request('to_date') }}">
-                                        </div>
-
-                                        {{-- زر البحث --}}
-                                        <div class="col-auto mb-2">
-                                            <button type="submit" class="btn btn-primary">بحث</button>
-                                        </div>
-
-                                    </div>
-                                </form>
-
-                            </div>
+                            <x-admin.search-form-component />
 
                             <div class="col ml-auto">
                                 <div class="dropdown float-right">
