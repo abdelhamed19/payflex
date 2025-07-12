@@ -73,8 +73,9 @@ function appendRoutes($sectionName)
     Route::get('{$sectionName}/create', [{$controllerName}::class, 'create'])->name('{$sectionName}.create');
     Route::post('{$sectionName}/store', [{$controllerName}::class, 'store'])->name('{$sectionName}.store');
     Route::get('{$sectionName}/{id}/edit', [{$controllerName}::class, 'edit'])->name('{$sectionName}.edit');
+    Route::get('{$sectionName}/{id}/show', [{$controllerName}::class, 'show'])->name('{$sectionName}.show');
     Route::put('{$sectionName}/{id}', [{$controllerName}::class, 'update'])->name('{$sectionName}.update');
-    Route::delete('{$sectionName}/{id}', [{$controllerName}::class, 'destroy'])->name('{$sectionName}.destroy');
+    Route::get('{$sectionName}/delete', [SettingController::class, 'deleteResource'])->name('{$sectionName}.destroy');
 
 EOD;
 
@@ -141,13 +142,15 @@ use App\Http\Controllers\Controller;
 use {$modelPath};
 use {$requestNamespace}\\{$createRequest};
 use {$requestNamespace}\\{$updateRequest};
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class {$controllerName} extends Controller
 {
-    public function index()
+    public function index(Request \$request)
     {
         return view('admin.{$sectionName}.index', [
-            'model' => {$modelName}::paginate(10),
+            'model' => {$modelName}::search(\$request->query())->paginate(10),
             'modelName' => '{$modelName}',
         ]);
     }
@@ -159,22 +162,48 @@ class {$controllerName} extends Controller
 
     public function store({$createRequest} \$request)
     {
-        // تخزين البيانات
+        \$data = \$request->validated();
+        DB::beginTransaction();
+        try {
+            {$modelName}::create(\$data);
+            DB::commit();
+            return redirect()->route('{$sectionName}.index')->with('success', __('admin.created_successfully'));
+        } catch (\Exception \$e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => __('admin.error_creating')]);
+        }
     }
 
     public function edit(\$id)
     {
-        return view('admin.{$sectionName}.edit', compact('id'));
+        return view('admin.{$sectionName}.edit', [
+            'id' => \$id,
+            'model' => {$modelName}::findOrFail(\$id),
+            'modelName' => '{$modelName}',
+        ]);
+    }
+
+    public function show(\$id)
+    {
+        return view('admin.{$sectionName}.show', [
+            'id' => \$id,
+            'model' => {$modelName}::findOrFail(\$id),
+            'modelName' => '{$modelName}',
+        ]);
     }
 
     public function update({$updateRequest} \$request, \$id)
     {
-        // تحديث البيانات
-    }
-
-    public function destroy(\$id)
-    {
-        // حذف البيانات
+        \$data = \$request->validated();
+        DB::beginTransaction();
+        try {
+            {$modelName}::where('id', \$id)->update(\$data);
+            DB::commit();
+            return redirect()->route('{$sectionName}.index')->with('success', __('admin.updated_successfully'));
+        } catch (\Exception \$e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => __('admin.error_updating')]);
+        }
     }
 }
 PHP;

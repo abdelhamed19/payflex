@@ -48,12 +48,46 @@ class BaseModel extends Model
             if (isset($this->attributes['image']) && $this->attributes['image'] != 'admin/default.jpg') {
                 $this->deleteFile($this->attributes['image']);
                 $this->attributes['image'] = $value;
-            }
-            else {
+            } else {
                 $this->attributes['image'] = $value;
             }
         } else {
             $this->attributes['image'] = 'admin/default.jpg';
         }
+    }
+    public function scopeSearch($query, $search)
+    {
+        // البحث النصي
+        if (!empty($search['search'])) {
+            $query->where(function ($q) use ($search) {
+                $q->where(function ($sub) use ($search) {
+                    $sub->where('name->ar', 'like', "%{$search['search']}%")
+                        ->orWhere('name->en', 'like', "%{$search['search']}%")
+                        ->orWhere('name', 'like', "%{$search['search']}%");
+                })
+                    ->orWhere(function ($sub) use ($search) {
+                        $sub->where('description->ar', 'like', "%{$search['search']}%")
+                            ->orWhere('description->en', 'like', "%{$search['search']}%")
+                            ->orWhere('description', 'like', "%{$search['search']}%");
+                    });
+            });
+        }
+
+        // التاريخ من
+        if (!empty($search['from'])) {
+            $query->whereDate('created_at', '>=', $search['from']);
+        }
+
+        // التاريخ إلى
+        if (!empty($search['to'])) {
+            $query->whereDate('created_at', '<=', $search['to']);
+        }
+
+        // الحالة
+        if (isset($search['is_active']) && $search['is_active'] !== '') {
+            $query->where('is_active', $search['is_active']);
+        }
+
+        return $query;
     }
 }
