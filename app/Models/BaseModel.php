@@ -9,22 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 class BaseModel extends Model
 {
     use HasFactory, UploadTrait;
-    public function getTranslation($attribute, $locale = null)
+public function getTranslation($attribute, $locale = null)
     {
-        if (is_null(json_decode($attribute, true))) {
+        $decoded = json_decode($attribute, true);
+        if (!is_array($decoded)) {
             return $attribute;
         }
-        if (request()->is('api/*')) {
-            $locale = app()->getLocale();
-        } else {
-            $locale = session()->get('lang');
+
+        if (!$locale) {
+            if (request()->is('api/*')) {
+                $locale = app()->getLocale();
+            } elseif (request()->is('admin/*')) {
+                $locale = session('lang', 'en');
+            } else {
+                $locale = 'en';
+            }
         }
-        $attribute = json_decode($attribute, true);
-        if (isset($attribute[$locale])) {
-            return $attribute[$locale];
-        } else {
-            return $attribute['en'];
-        }
+
+        return $decoded[$locale] ?? $decoded['en'] ?? reset($decoded);
     }
     public function getNameAttribute($value)
     {
@@ -57,8 +59,7 @@ class BaseModel extends Model
     }
     public function scopeSearch($query, $search)
     {
-        // البحث النصي
-        if (!empty($search['search'])) {
+        if (!empty($search['search']) && $this->isColumnExists('name')) {
             $query->where(function ($q) use ($search) {
                 $q->where(function ($sub) use ($search) {
                     $sub->where('name->ar', 'like', "%{$search['search']}%")
@@ -68,18 +69,16 @@ class BaseModel extends Model
             });
         }
 
-        // التاريخ من
         if (!empty($search['from'])) {
             $query->whereDate('created_at', '>=', $search['from']);
         }
 
-        // التاريخ إلى
         if (!empty($search['to'])) {
             $query->whereDate('created_at', '<=', $search['to']);
         }
 
         // الحالة
-        if (isset($search['is_active']) && $search['is_active'] !== '') {
+        if (isset($search['is_active']) && $search['is_active'] !== '' && $this->isColumnExists('is_active')) {
             $query->where('is_active', $search['is_active']);
         }
 
