@@ -69,7 +69,7 @@
     <script src="{{ asset("admin/$path/js/datamaps-zoomto.js") }}"></script>
     <script src="{{ asset("admin/$path/js/datamaps.custom.js") }}"></script>
     <script src="{{ asset("admin/$path/js/Chart.min.js") }}"></script>
-    <script src="{{ asset("admin/checkbox.js") }}"></script>
+    <script src="{{ asset('admin/checkbox.js') }}"></script>
     <script>
         /* defind global options */
         Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
@@ -77,6 +77,7 @@
     </script>
     <script src="{{ asset("admin/$path/js/gauge.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/jquery.sparkline.min.js") }}"></script>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
     <script src="{{ asset("admin/$path/js/apexcharts.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/apexcharts.custom.js") }}"></script>
     <script src="{{ asset("admin/$path/js/jquery.mask.min.js") }}"></script>
@@ -90,7 +91,7 @@
     <script src="{{ asset("admin/$path/js/jquery.dataTables.min.js") }}"></script>
     <script src="{{ asset("admin/$path/js/dataTables.bootstrap4.min.js") }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset("admin/general.js") }}"></script>
+    <script src="{{ asset('admin/general.js') }}"></script>
 
 
     <script>

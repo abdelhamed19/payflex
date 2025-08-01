@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocketController;
 use App\Http\Controllers\Api\AuthController;
 
 /*
@@ -23,3 +24,4 @@ Route::post('/sign-in', [AuthController::class, 'signIn'])
     ->name('api.login')
     ->middleware(['guest','role-login']);
 Route::post('/register', [AuthController::class, 'signUp']);
+Route::get('admin/socket',[SocketController::class,'index']);

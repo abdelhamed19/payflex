@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\SocketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +66,6 @@ Route::post('reset-password', [AuthController::class, 'forgetPassword'])->name('
 
 Route::get('{provider}/redirect', [AuthController::class, 'redirectToProvider'])->name('provider.redirect');
 Route::get('{provider}/callback', [AuthController::class, 'handleProviderCallback'])->name('provider.callback');
+Route::get('admin/socket', function (){
+    return view('admin.socket.index');
+});
