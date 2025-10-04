@@ -45,15 +45,7 @@ Route::prefix('admin')->middleware(['auth', 'check-role', 'role-login'])->group(
 
     Route::get('/search', [SettingController::class, 'search'])->name('admin.search');
     Route::post('/delete/items', [SettingController::class, 'deleteItems'])->name('admin.delete.items');
-    // Routes for laymor
-    Route::get('laymor/index', [LaymorController::class, 'index'])->name('laymor.index');
-    Route::get('laymor/create', [LaymorController::class, 'create'])->name('laymor.create');
-    Route::post('laymor/store', [LaymorController::class, 'store'])->name('laymor.store');
-    Route::get('laymor/{id}/edit', [LaymorController::class, 'edit'])->name('laymor.edit');
-    Route::get('laymor/{id}/show', [LaymorController::class, 'show'])->name('laymor.show');
-    Route::put('laymor/{id}', [LaymorController::class, 'update'])->name('laymor.update');
     Route::get('laymor/delete', [SettingController::class, 'deleteResource'])->name('laymor.destroy');
-
 });
 
 Route::view('/', 'auth.login')->name('login');
@@ -66,6 +58,6 @@ Route::post('reset-password', [AuthController::class, 'forgetPassword'])->name('
 
 Route::get('{provider}/redirect', [AuthController::class, 'redirectToProvider'])->name('provider.redirect');
 Route::get('{provider}/callback', [AuthController::class, 'handleProviderCallback'])->name('provider.callback');
-Route::get('admin/socket', function (){
+Route::get('admin/socket', function () {
     return view('admin.socket.index');
 });

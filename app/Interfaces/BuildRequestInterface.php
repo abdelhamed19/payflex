@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Interfaces;
+
 interface BuildRequestInterface
 {
     public function requestWithHeaders($url, $data, $headers = [], $method = 'POST');

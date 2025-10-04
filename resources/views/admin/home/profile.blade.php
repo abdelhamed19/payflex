@@ -129,7 +129,7 @@
                                 <!-- Submit Button -->
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-primary">{{ __('admin.submit') }}</button>
-                                    <a href="/home" class="btn btn-danger ml-3">
+                                    <a href="/admin/home" class="btn btn-danger ml-3">
                                         {{ __('admin.cancel') }}
                                     </a>
                                 </div>
